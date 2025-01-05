@@ -38,3 +38,51 @@
 
 // $theme-dark-bg: #333333;
 // $theme-dark-text: #ffffff;
+
+///////////////////////////////////////////
+
+// #### FONTS ####
+
+$font-primary: "Outfit", serif;
+$font-secondary: "Poppins", serif;
+$font-tertiary: "Prata", serif;
+
+// #### COLORS ####
+
+$primary-color: #ffffff;
+$secondary-color: #868686;
+$accent-color: #000000;
+
+// extra colors
+
+// #### Navbar ####
+
+$menu-item-font: $font-secondary;
+$menu-item-font-size: 16px;
+$menu-item-font-weight: 500;
+$menu-item-color: #2a2a2a;
+
+// #### Profile Menu ####
+
+$profile-menu-bg: #f8f8f8;
+$profile-menu-item-color: #5b5b5b;
+$profile-menu-item-size: 18px;
+$profile-menu-item-weight: 400;
+
+$profile-menu-item-color-hover: $accent-color;
+
+// #### Counter Header ####
+
+$counter-bg: $accent-color;
+$counter-color: $primary-color;
+$counter-font-size: 10px;
+$counter-font-weight: 400;
+$counter-font: $font-secondary;
+
+// #### Mobile Menu ####
+
+$mobile-menu-bg: $primary-color;
+$mobile-menu-color: $accent-color;
+$mobile-menu-font: $font-secondary;
+$mobile-menu-font-size: 18px;
+$mobile-menu-font-weight: 500;
