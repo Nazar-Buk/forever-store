@@ -14,51 +14,56 @@ import Login from "./pages/Login.jsx";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
 import Orders from "./pages/Orders.jsx";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      errorElement: <div>Ой шось сталося!!!</div>,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "/collection",
+          element: <Collection />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+        {
+          path: "/product/:productId",
+          element: <Product />,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+        {
+          path: "/place-order",
+          element: <PlaceOrder />,
+        },
+        {
+          path: "/orders",
+          element: <Orders />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    errorElement: <div>Ой шось сталося!!!</div>,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "/collection",
-        element: <Collection />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/product/:productId",
-        element: <Product />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/place-order",
-        element: <PlaceOrder />,
-      },
-      {
-        path: "/orders",
-        element: <Orders />,
-      },
-    ],
-  },
-]);
+    basename: import.meta.env.BASE_URL, // реакт сам знає що це тягнеться із файлу vite.config.js
+  }
+);
 
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
