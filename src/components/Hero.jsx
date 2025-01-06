@@ -1,0 +1,25 @@
+import React from "react";
+import { assets } from "../assets/assets";
+
+const Hero = () => {
+  return (
+    <section className="hero">
+      <div className="hero__container">
+        <div className="wrap-hero__content">
+          <div className="hero__text">
+            <div className="wrap-hero__text-content">
+              <p className="hero__top-title">our bestsellers</p>
+              <h1>Latest Arrivals</h1>
+              <p className="hero__bottom-title">Shop Now</p>
+            </div>
+          </div>
+          <div className="hero__picture">
+            <img src={assets.hero_img} alt="banner picture" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;

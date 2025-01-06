@@ -54,8 +54,12 @@ $secondary-color: #868686;
 $accent-color: #000000;
 
 // extra colors
+$border-color: #adadad;
+
+// ############################ HEADER ############################
 
 // #### Navbar ####
+$header-bottom-border: 1px solid $border-color;
 
 $menu-item-font: $font-secondary;
 $menu-item-font-size: 16px;
@@ -86,3 +90,15 @@ $mobile-menu-color: $accent-color;
 $mobile-menu-font: $font-secondary;
 $mobile-menu-font-size: 18px;
 $mobile-menu-font-weight: 500;
+
+// ############################ HERO ############################
+
+$hero-border-left: 1px solid $border-color;
+$hero-border-right: 1px solid $border-color;
+$hero-border-bottom: 1px solid $border-color;
+
+$hero-title-font: $font-tertiary;
+$hero-title-font-size: 60px;
+$hero-title-font-weight: 400;
+$hero-title-line-height: 1.2;
+$hero-title-color: #414141;
