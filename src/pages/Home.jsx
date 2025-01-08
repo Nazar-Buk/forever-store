@@ -1,10 +1,11 @@
 import Hero from "../components/Hero";
+import LatestCollections from "../components/LatestCollections";
 
 const Home = () => {
   return (
     <div className="home-page">
-      це мій сайт22222
       <Hero />
+      <LatestCollections />
     </div>
   );
 };
