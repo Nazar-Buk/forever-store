@@ -2,7 +2,7 @@
 
 @media (max-width: 992px) {
   .home-page {
-    .hero {
+    section.hero {
       .hero__container {
         .wrap-hero__content {
           flex-direction: column;
@@ -56,7 +56,7 @@
 
 @media (max-width: 540px) {
   .home-page {
-    .hero {
+    section.hero {
       .hero__container {
         .wrap-hero__content {
           .hero__text {

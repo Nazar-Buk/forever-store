@@ -102,3 +102,27 @@ $hero-title-font-size: 60px;
 $hero-title-font-weight: 400;
 $hero-title-line-height: 1.2;
 $hero-title-color: #414141;
+
+// ############################ LATEST COLLECTIONS CARD ############################
+
+$latest-card-name-font-size: 14px;
+$latest-card-name-font-weight: 500;
+$latest-card-name-color: #494949;
+
+$latest-card-price-font-size: 16px;
+$latest-card-price-font-weight: 500;
+$latest-card-price-color: #494949;
+
+// ############################ COMPONENTS ############################
+
+// #### Title ####
+$title-font-size: clamp(1.25rem, 1.063rem + 0.94vw, 2.188rem); // 35px to 20px
+$title-font-weight: 400;
+$title-color: #707070;
+$title-color-dark: #343434;
+$title-line-bg-color: #252525;
+
+// #### Paragraph ####
+$paragraph-color: #868686;
+$paragraph-font-size: clamp(0.938rem, 0.9rem + 0.19vw, 1.125rem); // 18px
+$paragraph-font-weight: 400;

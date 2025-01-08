@@ -24,6 +24,7 @@ header.header__container {
         gap: clamp(0.938rem, 2.08vw, 2.5rem); // 40px
 
         .menu__item {
+          display: inline-block;
           position: relative;
           font-size: v.$menu-item-font-size;
           font-family: v.$menu-item-font;

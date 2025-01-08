@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // import App from "./App.jsx";
+import ShopContextProvider from "./context/ShopContext.jsx";
 import Home from "./pages/Home.jsx";
 import App from "./App.jsx";
 import About from "./pages/About.jsx";
@@ -19,7 +20,7 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: <App />,
-      errorElement: <div>Ой шось сталося!!!</div>,
+      errorElement: <div>Ой лишенько! Щось сталося!!!</div>,
       children: [
         {
           index: true,
@@ -69,5 +70,7 @@ createRoot(document.getElementById("root")).render(
   // <StrictMode>
   // <App />
   // </StrictMode>
-  <RouterProvider router={router} fallbackElement={<>Loading...</>} />
+  <ShopContextProvider>
+    <RouterProvider router={router} fallbackElement={<>Loading...</>} />
+  </ShopContextProvider>
 );

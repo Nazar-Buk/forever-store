@@ -1,7 +1,7 @@
 @use "../base/variables" as v;
 
 .home-page {
-  .hero {
+  section.hero {
     .hero__container {
       .wrap-hero__content {
         display: flex;
@@ -89,6 +89,62 @@
           img {
             width: 100%;
             height: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  section.latest-collection {
+    margin-top: clamp(1.875rem, 0.875rem + 5vw, 6.875rem); // 110px
+
+    .latest-collection__container {
+      .wrap-latest-collection__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .title {
+          margin-bottom: 30px;
+        }
+
+        p.sub-title {
+          text-align: center;
+        }
+
+        .latest-collection__cards {
+          margin-top: 47px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 28px;
+          justify-content: center;
+
+          a.product-card {
+            max-width: 260px;
+            margin-bottom: 17px;
+
+            .wrap-product-card__img {
+              width: 100%;
+
+              img {
+                aspect-ratio: 260/300;
+              }
+            }
+
+            .product-card__name {
+              margin-top: 25px;
+              margin-bottom: 13px;
+              font-size: v.$latest-card-name-font-size;
+              font-weight: v.$latest-card-name-font-weight;
+              color: v.$latest-card-name-color;
+            }
+
+            .product-card__price {
+              font-size: v.$latest-card-price-font-size;
+              font-weight: v.$latest-card-price-font-weight;
+              color: v.$latest-card-price-color;
+            }
           }
         }
       }

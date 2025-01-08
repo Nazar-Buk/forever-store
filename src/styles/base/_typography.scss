@@ -62,3 +62,28 @@
 // li {
 //   line-height: $line-height-base;
 // }
+
+//////////////////////////////////////////
+
+@use "./variables" as v;
+
+// // Загальні стилі для тексту
+body {
+  font-family: v.$font-primary;
+  //   font-size: $font-size-base;
+  //   line-height: $line-height-base;
+  //   color: $text-color;
+}
+
+h2 {
+  font-size: v.$title-font-size;
+  font-weight: v.$title-font-weight;
+  color: v.$title-color;
+  text-transform: uppercase;
+}
+
+p {
+  color: v.$paragraph-color;
+  font-size: v.$paragraph-font-size;
+  font-weight: v.$paragraph-font-weight;
+}
