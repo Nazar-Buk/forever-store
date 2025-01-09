@@ -5,7 +5,7 @@ export const ShopContext = createContext(); // створюємо контекс
 
 const ShopContextProvider = (props) => {
   const currency = "$";
-  const delivery_fee = 10;
+  const delivery_fee = 10; // вартість доставки
 
   const value = {
     products,
