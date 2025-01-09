@@ -10,6 +10,7 @@ header.header__container {
     border-bottom: v.$header-bottom-border;
 
     .header__logo {
+      display: block;
       flex: 0 0 166px;
       aspect-ratio: 166/47;
     }

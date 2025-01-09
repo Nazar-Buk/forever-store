@@ -81,6 +81,9 @@
           p {
             font-size: 20px;
             font-weight: 500;
+            color: v.$mobile-menu-color;
+            font-size: v.$mobile-menu-font-size;
+            font-weight: v.$mobile-menu-font-weight;
           }
         }
       }
@@ -102,13 +105,26 @@
           ul.mobile-menu {
             margin: 0 auto;
             text-align: center;
+            width: 100%;
 
             li {
               .mobile-menu__item {
+                display: block;
                 padding: 10px;
-                color: v.$mobile-menu-color;
-                font-size: v.$mobile-menu-font-size;
-                font-weight: v.$mobile-menu-font-weight;
+
+                p {
+                  color: v.$mobile-menu-color;
+                  font-size: v.$mobile-menu-font-size;
+                  font-weight: v.$mobile-menu-font-weight;
+                }
+
+                &.active {
+                  background-color: v.$mobile-menu-item-bg-active;
+
+                  p {
+                    color: v.$mobile-menu-item-color-active;
+                  }
+                }
               }
             }
           }
@@ -147,6 +163,12 @@
                 stroke-width: 10px;
                 fill: #323232;
               }
+
+              p {
+                color: v.$mobile-menu-color;
+                font-size: v.$mobile-menu-font-size;
+                font-weight: v.$mobile-menu-font-weight;
+              }
             }
 
             ul.profile__menu {
@@ -169,6 +191,12 @@
             display: flex;
             align-items: center;
             gap: 10px;
+
+            p {
+              color: v.$mobile-menu-color;
+              font-size: v.$mobile-menu-font-size;
+              font-weight: v.$mobile-menu-font-weight;
+            }
           }
 
           .cart {
