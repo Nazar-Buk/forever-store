@@ -220,4 +220,42 @@
       }
     }
   }
+
+  section.our-policy {
+    .our-policy__container.wrap-policy-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(1.25rem, -9.774rem + 17.78vw, 11.563rem); // 185px
+      flex-wrap: wrap;
+
+      .our-policy__item {
+        margin-top: clamp(1.875rem, -1.625rem + 17.5vw, 19.375rem); // 310px
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .wrap-our-policy__img {
+          max-width: 43px;
+          aspect-ratio: 1/1;
+
+          img {
+          }
+        }
+
+        p.our-policy__title {
+          font-weight: v.$our-policy-title-font-weight;
+          font-size: v.$our-policy-title-font-size;
+          color: v.$our-policy-title-color;
+          margin-top: 30px;
+          margin-bottom: 15px;
+        }
+
+        p.our-policy__subtitle {
+        }
+      }
+    }
+  }
 }
