@@ -110,3 +110,9 @@ button {
     color: v.$btn-hover-color;
   }
 }
+
+input {
+  &:focus-visible {
+    border: 1px solid orange !important;
+  }
+}
