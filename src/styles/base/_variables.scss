@@ -56,6 +56,33 @@ $accent-color: #000000;
 // extra colors
 $border-color: #adadad;
 
+// ############################ COMPONENTS ############################
+
+// #### Title ####
+$title-font-size: clamp(1.25rem, 1.063rem + 0.94vw, 2.188rem); // 35px to 20px
+$title-font-weight: 400;
+$title-color: #707070;
+$title-color-dark: #343434;
+$title-line-bg-color: #252525;
+
+// #### Paragraph ####
+$paragraph-color: #868686;
+$paragraph-font-size: clamp(0.938rem, 0.9rem + 0.19vw, 1.125rem); // 18px
+$paragraph-font-weight: 400;
+
+// #### Button ####
+
+$btn-color: $primary-color;
+$btn-bg: $accent-color;
+$btn-font-size: 16px;
+$btn-font-weight: 400;
+$btn-border: 1px solid $accent-color;
+
+$btn-hover-color: $accent-color;
+$btn-hover-bg: $primary-color;
+
+// ############################ END COMPONENTS ############################
+
 // ############################ HEADER ############################
 
 // #### Navbar ####
@@ -122,16 +149,15 @@ $our-policy-title-font-weight: 600;
 $our-policy-title-font-size: 18px;
 $our-policy-title-color: #373737;
 
-// ############################ COMPONENTS ############################
+// ############################ NEWSLETTER ############################
 
-// #### Title ####
-$title-font-size: clamp(1.25rem, 1.063rem + 0.94vw, 2.188rem); // 35px to 20px
-$title-font-weight: 400;
-$title-color: #707070;
-$title-color-dark: #343434;
-$title-line-bg-color: #252525;
+$newsletter-color: #373737;
+$newsletter-font-size: clamp(1.375rem, 1.225rem + 0.75vw, 2.125rem); // 34px
+$newsletter-font-weight: 500;
 
-// #### Paragraph ####
-$paragraph-color: #868686;
-$paragraph-font-size: clamp(0.938rem, 0.9rem + 0.19vw, 1.125rem); // 18px
-$paragraph-font-weight: 400;
+$newsletter-input-border: 1px solid #c7c7c7;
+
+// $newsletter-btn-color: $primary-color;
+// $newsletter-btn-bg: $accent-color;
+// $newsletter-btn-font-size: 16px;
+// $newsletter-btn-font-weight: 400;
