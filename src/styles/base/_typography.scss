@@ -88,6 +88,13 @@ h3 {
   color: v.$newsletter-color;
 }
 
+h4 {
+  color: v.$footer-heading-color;
+  font-weight: v.$footer-heading-font-weight;
+  font-size: v.$footer-heading-font-size;
+  line-height: v.$footer-heading-line-height;
+}
+
 p {
   color: v.$paragraph-color;
   font-size: v.$paragraph-font-size;
