@@ -114,5 +114,6 @@ button {
 input {
   &:focus-visible {
     border: 1px solid orange !important;
+    outline: none;
   }
 }
