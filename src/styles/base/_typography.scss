@@ -95,6 +95,20 @@ h4 {
   line-height: v.$footer-heading-line-height;
 }
 
+h5 {
+  color: v.$h5-color;
+  font-size: v.$h5-font-size;
+  font-weight: v.$h5-font-weight;
+  text-transform: uppercase;
+}
+
+h6 {
+  color: v.$h6-color;
+  font-size: v.$h6-font-size;
+  font-weight: v.$h6-font-weight;
+  text-transform: uppercase;
+}
+
 p {
   color: v.$paragraph-color;
   font-size: v.$paragraph-font-size;
@@ -123,4 +137,12 @@ input {
     border: 1px solid orange !important;
     outline: none;
   }
+}
+
+input[type="checkbox"] {
+  border: v.$checkbox-border;
+}
+
+select {
+  font-size: 16px;
 }
