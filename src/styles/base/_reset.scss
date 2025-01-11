@@ -106,8 +106,12 @@ table {
 }
 
 input {
-  -webkit-appearance: none;
+  // -webkit-appearance: none;
   border-radius: 0;
+}
+
+input[type="checkbox"] {
+  margin: 0;
 }
 
 a {
