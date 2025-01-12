@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { assets } from "../assets/assets";
+import { ShopContext } from "../context/ShopContext";
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const { setShowSearch } = useContext(ShopContext);
 
   const isOpenMobileMenu = (isOpen) => {
     isOpen
@@ -45,9 +47,13 @@ const Header = () => {
           </ul>
         </nav>
         <div className="header__action-bar">
-          <div className="wrap-icon">
+          <Link
+            to="/collection"
+            onClick={() => setShowSearch(true)}
+            className="wrap-icon"
+          >
             <img src={assets.search_icon} alt="search" />
-          </div>
+          </Link>
           <div className="wrap-icon profile">
             <img src={assets.profile_icon} alt="profile-icon" />
             <div className="profile__menu">
@@ -195,12 +201,19 @@ const Header = () => {
                 </ul>
               )}
             </div>
-            <div className="search">
+            <Link
+              onClick={() => {
+                setShowSearch(true);
+                isOpenMobileMenu(false);
+              }}
+              to="/collection"
+              className="search"
+            >
               <div className="wrap-icon">
                 <img src={assets.search_icon} alt="search" />
               </div>
               <p>SEARCH</p>
-            </div>
+            </Link>
 
             <Link
               to="/cart"
