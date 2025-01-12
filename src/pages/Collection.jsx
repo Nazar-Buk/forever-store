@@ -7,10 +7,91 @@ const Collection = () => {
   const { products } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(true);
   const [filterProducts, setFilterProducts] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [subCategory, setSubCategory] = useState([]);
+  const [sortType, setSortType] = useState("relevant");
+
+  const toggleCategory = (e) => {
+    const { value } = e.target;
+
+    // перевіряю чи є в масиві те що потрапляє у value, якщо є
+    // то беру актуальний стейт, фільтрую його та записую все окрім value,
+    // щоб воно пропало з масиву,(я зняв галочку з Checkbox)
+    if (category.includes(value)) {
+      setCategory((prev) => prev.filter((item) => item !== value));
+    } else {
+      // перевіряю чи є в масиві те що потрапляє у value, якщо нема то додаю його в масив
+      setCategory((prev) => [...prev, value]);
+    }
+  };
+
+  const toggleSubCategory = (e) => {
+    const { value } = e.target;
+
+    if (subCategory.includes(value)) {
+      setSubCategory((prev) => prev.filter((item) => item !== value));
+    } else {
+      setSubCategory((prev) => [...prev, value]);
+    }
+  };
+
+  const applyFilters = () => {
+    let productsCopy = products.slice(); // зробив копію всіх продуктів
+    // let productsCopy = [...filterProducts]; // зробив копію всіх продуктів
+
+    if (category.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        category.includes(item.category)
+      );
+    }
+
+    if (subCategory.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        subCategory.includes(item.subCategory)
+      );
+    }
+
+    if (sortType && sortType !== "relevant") {
+      if (sortType === "low-high") {
+        productsCopy = productsCopy.sort((a, b) => a.price - b.price);
+      }
+
+      if (sortType === "high-low") {
+        productsCopy = productsCopy.sort((a, b) => b.price - a.price);
+      }
+    }
+
+    setFilterProducts(productsCopy);
+  };
+
+  const sortProducts = () => {
+    let fpCopy = filterProducts.slice(); //filteredProducts copy
+
+    switch (sortType) {
+      case "low-high":
+        setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
+        break;
+      case "high-low":
+        setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
+        break;
+      default:
+        applyFilters();
+
+        break;
+    }
+  };
 
   useEffect(() => {
     setFilterProducts(products);
   }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [subCategory, category]);
+
+  useEffect(() => {
+    sortProducts();
+  }, [sortType]);
 
   return (
     <section className="collection-page">
@@ -32,18 +113,18 @@ const Collection = () => {
               version="1.1"
               id="Layer_1"
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 330 330"
-              xml:space="preserve"
+              xmlSpace="preserve"
               stroke="#000000"
-              stroke-width="0.0033"
+              strokeWidth="0.0033"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0" />
+              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
 
               <g id="SVGRepo_iconCarrier">
@@ -63,24 +144,36 @@ const Collection = () => {
                   className="category-item__checkbox"
                   type="checkbox"
                   value={"Men"}
+                  onChange={toggleCategory}
+                  id="men"
                 />
-                <div className="category-item__name">Men</div>
+                <label htmlFor="men" className="category-item__name">
+                  Men
+                </label>
               </div>
               <div className="wrap-category-item">
                 <input
                   className="category-item__checkbox"
                   type="checkbox"
                   value={"Women"}
+                  onChange={toggleCategory}
+                  id="women"
                 />
-                <div className="category-item__name">Women</div>
+                <label htmlFor="women" className="category-item__name">
+                  Women
+                </label>
               </div>
               <div className="wrap-category-item">
                 <input
                   className="category-item__checkbox"
                   type="checkbox"
                   value={"Kids"}
+                  onChange={toggleCategory}
+                  id="kids"
                 />
-                <div className="category-item__name">Kids</div>
+                <label htmlFor="kids" className="category-item__name">
+                  Kids
+                </label>
               </div>
             </div>
             <div className="category-box">
@@ -90,24 +183,36 @@ const Collection = () => {
                   className="category-item__checkbox"
                   type="checkbox"
                   value={"Topwear"}
+                  onChange={toggleSubCategory}
+                  id="top-wear"
                 />
-                <div className="category-item__name">Top Wear</div>
+                <label htmlFor="top-wear" className="category-item__name">
+                  Top Wear
+                </label>
               </div>
               <div className="wrap-category-item">
                 <input
                   className="category-item__checkbox"
                   type="checkbox"
                   value={"Bottomwear"}
+                  onChange={toggleSubCategory}
+                  id="bottom-wear"
                 />
-                <div className="category-item__name">Bottom Wear</div>
+                <label htmlFor="bottom-wear" className="category-item__name">
+                  Bottom Wear
+                </label>
               </div>
               <div className="wrap-category-item">
                 <input
                   className="category-item__checkbox"
                   type="checkbox"
                   value={"Winterwear"}
+                  onChange={toggleSubCategory}
+                  id="winter-wear"
                 />
-                <div className="category-item__name">Winter Wear</div>
+                <label htmlFor="winter-wear" className="category-item__name">
+                  Winter Wear
+                </label>
               </div>
             </div>
           </div>
@@ -116,7 +221,11 @@ const Collection = () => {
           <div className="collection-content__settings">
             <Title text1="All " text2="Collections" />
             <div className="wrap-sorting-select">
-              <select className="sorting-box">
+              <select
+                onChange={(e) => setSortType(e.target.value)}
+                className="sorting-box"
+                name="sorting"
+              >
                 <option value="relevant">Sort by: Relevant</option>
                 <option value="low-high">Sort by: Low to High</option>
                 <option value="high-low">Sort by: High to Low</option>
