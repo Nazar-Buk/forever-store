@@ -40,9 +40,12 @@ section.collection-page {
             input.category-item__checkbox {
               width: 20px;
               height: 20px;
+              cursor: pointer;
             }
 
             .category-item__name {
+              cursor: pointer;
+
               color: v.$checkbox-name-color;
               font-size: v.$checkbox-name-font-size;
               font-weight: v.$checkbox-name-font-weight;
