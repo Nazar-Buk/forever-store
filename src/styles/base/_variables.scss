@@ -203,12 +203,19 @@ $footer-nav-item-line-height: 1.66;
 
 $footer-copyright-border: 1px solid #bdbdbd;
 
+// ############################ SEARCH ############################
+
+$search-bottom-border: $header-bottom-border;
+$search-bg: #86868630;
+$search-border-radius: 25px;
+$search-icon-size: 25px;
+$cross-icon-size: 15px;
+
 // ############################ COLLECTION PAGE ############################
 
 $filter-category-border: 1px solid #c8c8c8;
-
 $select-sorting-border: 1px solid #c8c8c8;
-
 $select-sorting-arrow-size: 14px;
+$select-color: $accent-color;
 
 // ############################ END COLLECTION PAGE ############################

@@ -8,7 +8,6 @@ const LatestCollections = () => {
   const [latestProducts, setLatestProducts] = useState([]);
 
   useEffect(() => {
-    console.log("render-der-der =)");
     setLatestProducts(products.slice(0, 10));
   }, []);
 
