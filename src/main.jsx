@@ -39,7 +39,7 @@ const router = createBrowserRouter(
           element: <Contact />,
         },
         {
-          path: "/product/:productId",
+          path: "/product/:productId", // напиши норм назву бо потім будеш productId використовувати
           element: <Product />,
         },
         {

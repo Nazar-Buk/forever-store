@@ -189,12 +189,12 @@ $newsletter-input-border: 1px solid #c7c7c7;
 $footer-text-color: #595959;
 $footer-text-font-weight: 400;
 $footer-text-font-size: 18px;
-$footer-text-line-height: 1.66; /* 30px(було в макеті line-height ) / 18px (font-size) / 100 */
+$footer-text-line-height: 1.66; /* 30px(було в макеті line-height ) / 18px (font-size)  */
 
 $footer-heading-color: #5a5a5a;
 $footer-heading-font-weight: 600;
 $footer-heading-font-size: 22px;
-$footer-heading-line-height: 1.66; /* 30px(було в макеті line-height ) / 18px (font-size) / 100 */
+$footer-heading-line-height: 1.66; /* 30px(було в макеті line-height ) / 18px (font-size)  */
 
 $footer-nav-item-color: $footer-text-color;
 $footer-nav-item-font-weight: 400;
@@ -219,3 +219,19 @@ $select-sorting-arrow-size: 14px;
 $select-color: $accent-color;
 
 // ############################ END COLLECTION PAGE ############################
+
+// ############################ PRODUCT PAGE ############################
+
+$product-title-fz: 34px; // 34px
+$product-title-fw: 500;
+$product-title-color: #3d3d3d;
+
+$product-price-fz: 32px;
+$product-price-fw: 500;
+$product-price-color: #2a2a2a;
+
+$product-small-desc-fz: 16px;
+$product-small-desc-fw: 400;
+$product-small-desc-color: #555555;
+
+// ############################ END PRODUCT PAGE ############################
