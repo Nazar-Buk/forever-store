@@ -7,5 +7,6 @@
 [class*="__container"] {
   max-width: 1620px; // 1590px + 15px + 15px
   margin: 0 auto;
-  padding: 0 15px;
+  // overflow: 0 15px;
+  padding: 0 base.$padding-main-container; // так підключив змінну
 }
