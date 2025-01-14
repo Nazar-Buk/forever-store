@@ -87,13 +87,13 @@
           .small-images {
             order: 2;
 
-            display: grid;
-            grid-template-columns: repeat(auto-fit, 125px);
-            justify-content: center;
+            flex-direction: row;
+            max-width: calc(100svw - (v.$padding-main-container * 2));
+            overflow-x: scroll;
+            scroll-snap-type: inline;
 
             .wrap-small-img {
-              cursor: pointer;
-              width: 125px;
+              min-width: 140px;
 
               img {
               }
@@ -106,6 +106,29 @@
             .wrap-large-img {
               img {
               }
+            }
+          }
+
+          .scroll-tip {
+            display: flex;
+            order: 3;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+              width: 67px;
+              height: 38px;
+              fill: #868686;
+
+              &.scroll__arrow-left {
+                transform: rotate(180deg);
+              }
+
+              &.scroll__arrow-right {
+              }
+            }
+
+            .tip-text {
             }
           }
         }

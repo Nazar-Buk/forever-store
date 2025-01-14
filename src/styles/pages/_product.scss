@@ -13,9 +13,43 @@ section.product-page {
         gap: 17px;
 
         .small-images {
+          max-height: 880px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          scrollbar-gutter: stable;
           display: flex;
           flex-direction: column;
           gap: 15px;
+          min-width: 140px;
+
+          &::-webkit-scrollbar {
+            width: 8px; // Ширина вертикального скролу
+            height: 8px; // Висота горизонтального скролу
+          }
+
+          // Стилізація доріжки (фон під скролом)
+          &::-webkit-scrollbar-track {
+            background-color: #f0f0f0;
+            border-radius: 4px;
+          }
+
+          // Стилізація повзунка (сам скрол)
+          &::-webkit-scrollbar-thumb {
+            background-color: #888; // Колір повзунка
+            border-radius: 4px;
+            &:hover {
+              background-color: #555; // Колір при наведенні
+            }
+          }
+
+          // Стилізація кута, де горизонтальний і вертикальний скрол перетинаються
+          &::-webkit-scrollbar-corner {
+            background-color: transparent;
+          }
+
+          /* Стилізація скролу для Firefox */
+          scrollbar-width: thin; /* Варіанти: auto, thin, none */
+          scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1); /* Повзунок і фон */
 
           .wrap-small-img {
             cursor: pointer;
@@ -41,6 +75,10 @@ section.product-page {
               aspect-ratio: 590/680;
             }
           }
+        }
+
+        .scroll-tip {
+          display: none;
         }
       }
 
