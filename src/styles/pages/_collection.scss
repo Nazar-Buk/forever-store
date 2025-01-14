@@ -77,8 +77,7 @@ section.collection-page {
             // малюю стрілочку
             content: "";
             display: block;
-            background: url("https://github.com/Nazar-Buk/forever-store/blob/main/public/dropdown_icon.svg")
-              no-repeat; // поміняй fill у файлі svg та рефрешни
+            background: url("#{$env('PUBLIC_URL')}/dropdown_icon.svg") no-repeat; // поміняй fill у файлі svg та рефрешни
 
             width: v.$select-sorting-arrow-size;
             height: v.$select-sorting-arrow-size;
