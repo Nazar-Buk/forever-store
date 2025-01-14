@@ -14,13 +14,14 @@ import Cart from "./pages/Cart.jsx";
 import Login from "./pages/Login.jsx";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
 import Orders from "./pages/Orders.jsx";
+import Error from "./pages/Error.jsx";
 
 const router = createBrowserRouter(
   [
     {
       path: "/",
       element: <App />,
-      errorElement: <div>Ой лишенько! Щось сталося!!!</div>,
+      errorElement: <Error />,
       children: [
         {
           index: true,
