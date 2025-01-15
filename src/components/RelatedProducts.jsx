@@ -10,11 +10,21 @@ const RelatedProducts = (props) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    const allRelatedProducts = products.filter(
-      (item) => item.subCategory === productData.subCategory
-    );
+    if (products.length > 0) {
+      let productsCopy = products.slice();
 
-    setRelatedProducts(allRelatedProducts.slice(0, 5));
+      productsCopy = productsCopy.filter((item) => {
+        if (
+          item.category === productData.category &&
+          item.subCategory === productData.subCategory &&
+          item._id !== productData._id
+        ) {
+          return item;
+        }
+      });
+
+      setRelatedProducts(productsCopy.slice(0, 5));
+    }
   }, [productData]);
 
   return (

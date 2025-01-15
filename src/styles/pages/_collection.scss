@@ -114,13 +114,7 @@ section.collection-page {
         }
       }
 
-      .collection__products {
-        display: grid;
-        gap: 30px;
-        grid-template-columns: repeat(auto-fit, 260px);
-
-        justify-content: center;
-
+      .product__cards {
         a.product-card {
         }
       }

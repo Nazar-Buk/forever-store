@@ -128,9 +128,7 @@ const Product = () => {
             )}
           </div>
           <div className="product__details-box">
-            <div className="details__title">
-              Men Round Neck Pure Cotton T-shirt
-            </div>
+            <div className="details__title">{productData.name}</div>
             <div className="details__rating">
               <div className="rating__stars">
                 <div className="wrap-star">
@@ -155,11 +153,7 @@ const Product = () => {
               {currency}
               {productData.price}
             </div>
-            <p className="details__small-desc">
-              A lightweight, usually knitted, pullover shirt, close-fitting and
-              with a round neckline and short sleeves, worn as an undershirt or
-              outer garment.
-            </p>
+            <p className="details__small-desc">{productData.description}</p>
             <div className="details__choose-size">
               <p className="choose-size__title">Select Size</p>
               <div className="choose-size__items">

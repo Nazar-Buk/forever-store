@@ -237,7 +237,7 @@ const Collection = () => {
               </select>
             </div>
           </div>
-          <div className="collection__products">
+          <div className="product__cards">
             {filterProducts.map((item) => (
               <ProductItem
                 key={item._id}
