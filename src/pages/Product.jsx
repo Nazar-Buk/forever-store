@@ -1,14 +1,16 @@
 import { useEffect, useState, useContext, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
+import RelatedProducts from "../components/RelatedProducts";
+
 import { assets } from "../assets/assets";
 
 const Product = () => {
   const { productId } = useParams(); // потім треба буде коли буде бек і база даних
-  const smallPicturesBox = useRef(null);
+  const smallPicturesBoxRef = useRef(null);
 
   const { products, currency } = useContext(ShopContext);
-  const [productData, setProductData] = useState(false);
+  const [productData, setProductData] = useState(false); // було false
   const [image, setImage] = useState(productData.image?.[0]);
   const [size, setSize] = useState("");
   const [isScrollable, setIsScrollable] = useState(false);
@@ -25,10 +27,14 @@ const Product = () => {
   };
 
   const checkIfScrollableBox = () => {
-    const box = smallPicturesBox.current;
+    const box = smallPicturesBoxRef.current;
 
     if (box) {
       setIsScrollable(box.scrollWidth > box.clientWidth);
+    }
+
+    if (productData.image?.length <= 1) {
+      setIsScrollable(false);
     }
   };
 
@@ -39,29 +45,30 @@ const Product = () => {
   useEffect(() => {
     checkIfScrollableBox();
     window.addEventListener("resize", checkIfScrollableBox);
-    console.log(smallPicturesBox, "smallPicturesBox");
 
     return () => window.removeEventListener("resize", checkIfScrollableBox);
-  }, [productData]);
+  }, [productData, productId]);
 
   return productData ? (
     <section className="product-page">
       <section className="product__container">
         <div className="product__box">
           <div className="product__images-box">
-            <div ref={smallPicturesBox} className="small-images">
-              {productData.image.map((item, index) => {
-                return (
-                  <div
-                    onClick={() => setImage(item)}
-                    key={index}
-                    className="wrap-small-img"
-                  >
-                    <img src={item} alt="small product item" />
-                  </div>
-                );
-              })}
-            </div>
+            {productData.image?.length > 1 && (
+              <div ref={smallPicturesBoxRef} className="small-images">
+                {productData.image.map((item, index) => {
+                  return (
+                    <div
+                      onClick={() => setImage(item)}
+                      key={index}
+                      className="wrap-small-img"
+                    >
+                      <img src={item} alt="small product item" />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             <div className="large-image">
               <div className="wrap-large-img">
@@ -156,7 +163,7 @@ const Product = () => {
             <div className="details__choose-size">
               <p className="choose-size__title">Select Size</p>
               <div className="choose-size__items">
-                {productData.sizes.map((item, index) => (
+                {productData.sizes?.map((item, index) => (
                   <div
                     onClick={() => setSize(item)}
                     key={index}
@@ -183,6 +190,31 @@ const Product = () => {
           </div>
         </div>
       </section>
+      <section className="product__description">
+        <div className="description__container">
+          <div className="description__body">
+            <b className="description__title-tab">Description</b>
+            <div className="description-text-box">
+              <p className="description__text">
+                An e-commerce website is an online platform that facilitates the
+                buying and selling of products or services over the internet. It
+                serves as a virtual marketplace where businesses and individuals
+                can showcase their products, interact with customers, and
+                conduct transactions without the need for a physical presence.
+                E-commerce websites have gained immense popularity due to their
+                convenience, accessibility, and the global reach they offer.
+              </p>
+              <p className="description__text">
+                E-commerce websites typically display products or services along
+                with detailed descriptions, images, prices, and any available
+                variations (e.g., sizes, colors). Each product usually has its
+                own dedicated page with relevant information.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <RelatedProducts productData={productData} />
     </section>
   ) : (
     <div>lalala</div>

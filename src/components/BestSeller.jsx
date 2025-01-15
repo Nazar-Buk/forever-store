@@ -21,7 +21,7 @@ const BestSeller = () => {
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the.
           </p>
-          <div className="best-sellers__cards">
+          <div className="product__cards">
             {bestSeller.map((item) => (
               <ProductItem
                 key={item._id}

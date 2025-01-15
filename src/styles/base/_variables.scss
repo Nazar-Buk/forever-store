@@ -168,14 +168,6 @@ $hero-title-color: #414141;
 
 // ############################ LATEST COLLECTIONS CARD ############################
 
-$latest-card-name-font-size: $product-card-name-font-size;
-$latest-card-name-font-weight: $product-card-name-font-weight;
-$latest-card-name-color: $product-card-name-color;
-
-$latest-card-price-font-size: $product-card-price-font-size;
-$latest-card-price-font-weight: $product-card-price-font-weight;
-$latest-card-price-color: $product-card-price-color;
-
 // ############################ OUR POLICY ############################
 
 $our-policy-title-font-weight: 600;
@@ -212,7 +204,7 @@ $footer-copyright-border: 1px solid #bdbdbd;
 // ############################ SEARCH ############################
 
 $search-bottom-border: $header-bottom-border;
-$search-bg: #86868630;
+$search-bg: rgba(134, 134, 134, 0.05);
 $search-border-radius: 25px;
 $search-icon-size: 25px;
 $cross-icon-size: 15px;
@@ -239,5 +231,7 @@ $product-price-color: #2a2a2a;
 $product-small-desc-fz: 16px;
 $product-small-desc-fw: 400;
 $product-small-desc-color: #555555;
+
+$product-desc-border: 1px solid $border-color;
 
 // ############################ END PRODUCT PAGE ############################
