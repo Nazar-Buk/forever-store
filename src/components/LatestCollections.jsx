@@ -20,7 +20,7 @@ const LatestCollections = () => {
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the.
           </p>
-          <div className="latest-collection__cards">
+          <div className="product__cards">
             {latestProducts.map((item) => (
               <ProductItem
                 key={item._id}

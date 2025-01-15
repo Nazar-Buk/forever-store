@@ -1,36 +1,45 @@
 @use "../base/variables" as v;
 
-a.product-card {
-  display: block;
-  max-width: 260px;
-  margin-bottom: 17px;
+.product__cards {
+  margin-top: 47px;
+  gap: 28px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 260px);
+  justify-content: center;
 
-  .wrap-product-card__img {
-    overflow: clip;
-    width: 100%;
+  a.product-card {
+    display: block;
+    max-width: 260px;
+    margin-bottom: 17px;
 
-    img {
-      transition: all ease-in-out 0.3s;
+    .wrap-product-card__img {
+      overflow: clip;
+      width: 100%;
 
-      aspect-ratio: 260/300;
+      img {
+        transition: all ease-in-out 0.3s;
 
-      &:hover {
-        transform: scale(1.1);
+        aspect-ratio: 260/300;
+
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
-  }
 
-  .product-card__name {
-    margin-top: 25px;
-    margin-bottom: 13px;
-    font-size: v.$product-card-name-font-size;
-    font-weight: v.$product-card-name-font-weight;
-    color: v.$product-card-name-color;
-  }
+    .product-card__name {
+      margin-top: 25px;
+      margin-bottom: 13px;
+      font-size: v.$product-card-name-font-size;
+      font-weight: v.$product-card-name-font-weight;
+      color: v.$product-card-name-color;
+    }
 
-  .product-card__price {
-    font-size: v.$product-card-price-font-size;
-    font-weight: v.$product-card-price-font-weight;
-    color: v.$product-card-price-color;
+    .product-card__price {
+      font-size: v.$product-card-price-font-size;
+      font-weight: v.$product-card-price-font-weight;
+      color: v.$product-card-price-color;
+    }
   }
 }
