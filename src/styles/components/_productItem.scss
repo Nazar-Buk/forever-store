@@ -21,6 +21,7 @@
         transition: all ease-in-out 0.3s;
 
         aspect-ratio: 260/300;
+        object-fit: cover;
 
         &:hover {
           transform: scale(1.1);

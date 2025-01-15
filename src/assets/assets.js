@@ -53,6 +53,12 @@ import p_img49 from "./p_img49.png";
 import p_img50 from "./p_img50.png";
 import p_img51 from "./p_img51.png";
 import p_img52 from "./p_img52.png";
+import vika from "./vika.jpeg";
+import vika2 from "./vika2.jpeg";
+import vika3 from "./vika3.jpeg";
+import vika4 from "./vika4.jpeg";
+import vika5 from "./vika5.jpeg";
+import vika6 from "./vika6.jpeg";
 
 import logo from "./logo.png";
 import hero_img from "./hero_img.png";
@@ -137,6 +143,19 @@ export const products = [
     bestseller: false,
   },
   {
+    _id: "aaab1",
+    name: "Vika Zip-Front Relaxed Fit Jacket",
+    description:
+      "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
+    price: 750,
+    image: [vika, vika2, vika3],
+    category: "Men",
+    subCategory: "Winterwear",
+    sizes: ["M", "L", "XL"],
+    date: 1716668445448,
+    bestseller: false,
+  },
+  {
     _id: "aaaad",
     name: "Men Round Neck Pure Cotton T-shirt",
     description:
@@ -199,6 +218,32 @@ export const products = [
     subCategory: "Topwear",
     sizes: ["S", "M", "L", "XL"],
     date: 1716622345448,
+    bestseller: false,
+  },
+  {
+    _id: "aaab2",
+    name: "Vika Zip-Front Relaxed Fit Jacket",
+    description:
+      "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
+    price: 450,
+    image: [vika4, vika5],
+    category: "Women",
+    subCategory: "Winterwear",
+    sizes: ["S", "M"],
+    date: 1716668445448,
+    bestseller: true,
+  },
+  {
+    _id: "aaab3",
+    name: "Vika Zip-Front Relaxed Fit Jacket",
+    description:
+      "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
+    price: 550,
+    image: [vika6],
+    category: "Women",
+    subCategory: "Winterwear",
+    sizes: ["S", "M", "L", "XL"],
+    date: 1716668445448,
     bestseller: false,
   },
   {

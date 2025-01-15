@@ -57,6 +57,7 @@ section.product-page {
 
             img {
               aspect-ratio: 140/160;
+              object-fit: cover;
             }
           }
         }
@@ -73,6 +74,7 @@ section.product-page {
               width: 600px;
               min-width: 260px;
               aspect-ratio: 590/680;
+              object-fit: cover;
             }
           }
         }
