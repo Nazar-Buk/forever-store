@@ -7,7 +7,8 @@ import { ShopContext } from "../context/ShopContext";
 const Header = () => {
   const [visible, setVisible] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  const cartTotalCount = getCartCount();
 
   const isOpenMobileMenu = (isOpen) => {
     isOpen
@@ -64,7 +65,7 @@ const Header = () => {
           </div>
           <Link to="/cart" className="wrap-icon cart-icon">
             <img src={assets.cart_icon} alt="shopping cart" />
-            <p>10</p>
+            <p className={`${cartTotalCount && "active"}`}>{cartTotalCount}</p>
           </Link>
           <div
             onClick={() => isOpenMobileMenu(true)}
@@ -222,7 +223,9 @@ const Header = () => {
             >
               <div className="wrap-icon">
                 <img src={assets.cart_icon} alt="shopping cart" />
-                <p className="counter">10</p>
+                <p className={`${cartTotalCount && "active "} counter`}>
+                  {cartTotalCount}
+                </p>
               </div>
               <p className="cart__title">SHOPPING CART</p>
             </Link>

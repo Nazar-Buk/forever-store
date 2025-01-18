@@ -79,6 +79,7 @@ import razorpay_logo from "./razorpay_logo.png";
 import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
 import error_404 from "./error_404.gif";
+import empty_cart from "./empty_cart.png";
 
 export const assets = {
   logo,
@@ -100,6 +101,7 @@ export const assets = {
   stripe_logo,
   cross_icon,
   error_404,
+  empty_cart,
 };
 
 export const products = [
@@ -149,7 +151,7 @@ export const products = [
       "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
     price: 750,
     image: [vika, vika2, vika3],
-    category: "Men",
+    category: "Women",
     subCategory: "Winterwear",
     sizes: ["M", "L", "XL"],
     date: 1716668445448,

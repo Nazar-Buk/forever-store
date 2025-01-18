@@ -61,6 +61,8 @@ $accent-color: #000000;
 
 // extra colors
 $border-color: #adadad;
+$color-error: #e74c3c;
+$active-color: orange;
 
 // ############################ COMPONENTS ############################
 
@@ -138,10 +140,11 @@ $profile-menu-item-color-hover: $accent-color;
 // #### Counter Header ####
 
 $counter-bg: $accent-color;
-$counter-color: $primary-color;
 $counter-font-size: 10px;
-$counter-font-weight: 400;
+$counter-font-weight: 600;
 $counter-font: $font-secondary;
+$counter-color: $primary-color;
+$counter-color-bg-active: $active-color;
 
 // #### Mobile Menu ####
 
@@ -235,3 +238,9 @@ $product-small-desc-color: #555555;
 $product-desc-border: 1px solid $border-color;
 
 // ############################ END PRODUCT PAGE ############################
+
+// ############################ CART PAGE ############################
+$border-radius-increase-decrease-btn: 10px;
+$cart-product-count-size: 40px;
+
+// ############################ END CART PAGE ############################
