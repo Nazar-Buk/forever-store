@@ -7,9 +7,10 @@ import { assets } from "../assets/assets";
 
 const Product = () => {
   const { productId } = useParams(); // потім треба буде коли буде бек і база даних
+  const { products, currency, addToCart } = useContext(ShopContext);
+
   const smallPicturesBoxRef = useRef(null);
 
-  const { products, currency } = useContext(ShopContext);
   const [productData, setProductData] = useState(false); // було false
   const [image, setImage] = useState(productData.image?.[0]);
   const [size, setSize] = useState("");
@@ -170,7 +171,12 @@ const Product = () => {
                 ))}
               </div>
             </div>
-            <button className="add-to-cart-btn">ADD TO CART</button>
+            <button
+              onClick={() => addToCart(productId, size)}
+              className="add-to-cart-btn"
+            >
+              ADD TO CART
+            </button>
             <hr />
             <div className="details__policy">
               <p className="policy">100% Original product.</p>
@@ -208,7 +214,7 @@ const Product = () => {
           </div>
         </div>
       </section>
-      <RelatedProducts productData={productData} />
+      <RelatedProducts productData={productData} setSize={setSize} />
     </section>
   ) : (
     <div>lalala</div>

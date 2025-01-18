@@ -4,7 +4,7 @@ import Title from "./Title";
 import ProductItem from "./ProductItem";
 
 const RelatedProducts = (props) => {
-  const { productData } = props;
+  const { productData, setSize } = props;
 
   const { products } = useContext(ShopContext);
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -40,6 +40,7 @@ const RelatedProducts = (props) => {
                 image={item.image}
                 price={item.price}
                 name={item.name}
+                setSize={setSize}
               />
             ))}
           </div>

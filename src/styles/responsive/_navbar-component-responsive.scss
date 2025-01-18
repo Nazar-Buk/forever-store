@@ -223,6 +223,10 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                &.active {
+                  background-color: v.$counter-color-bg-active;
+                }
               }
             }
 
