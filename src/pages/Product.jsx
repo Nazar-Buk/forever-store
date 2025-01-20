@@ -1,19 +1,24 @@
 import { useEffect, useState, useContext, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import RelatedProducts from "../components/RelatedProducts";
 
 import { assets } from "../assets/assets";
 
 const Product = () => {
+  const navigate = useNavigate();
+
   const { productId } = useParams(); // потім треба буде коли буде бек і база даних
-  const { products, currency, addToCart } = useContext(ShopContext);
+  const location = useLocation(); // location.state Так отримувати стейт через Link
+  console.log(location, "location");
+  const { products, currency, addToCart, updateCartProduct } =
+    useContext(ShopContext);
 
   const smallPicturesBoxRef = useRef(null);
 
   const [productData, setProductData] = useState(false); // було false
   const [image, setImage] = useState(productData.image?.[0]);
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState(location.state || "");
   const [isScrollable, setIsScrollable] = useState(false);
 
   const fetchProductData = async () => {
@@ -172,10 +177,17 @@ const Product = () => {
               </div>
             </div>
             <button
-              onClick={() => addToCart(productId, size)}
+              onClick={() => {
+                if (location.state) {
+                  updateCartProduct(location.state, size, productId);
+                  navigate("/cart");
+                } else {
+                  addToCart(productId, size);
+                }
+              }}
               className="add-to-cart-btn"
             >
-              ADD TO CART
+              {location.state ? "EDIT PRODUCT" : "ADD TO CART"}
             </button>
             <hr />
             <div className="details__policy">

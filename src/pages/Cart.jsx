@@ -53,10 +53,13 @@ const Cart = () => {
                 (product) => product._id === item._id
               );
 
+              const checkedSize = item.size;
+
               return (
                 <div key={index} className="cart__product">
                   <Link
                     to={`/product/${item._id}`}
+                    state={checkedSize} // Так передавати стейт через Link !!!
                     className="wrap-image-details"
                   >
                     <div className="wrap-cart__product-img">

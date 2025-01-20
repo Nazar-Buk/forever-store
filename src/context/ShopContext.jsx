@@ -30,9 +30,13 @@ const ShopContextProvider = (props) => {
       } else {
         cartData[itemId][size] = 1; // додаємо товар нового розміру
       }
+
+      toast.success("Product was added");
     } else {
       cartData[itemId] = {}; // додаємо новий запис (товар)
       cartData[itemId][size] = 1; // додаємо новий розмір до щойно зробленого товару
+
+      toast.success("Product was added");
     }
 
     // КОЖНІ КВАДРАТНІ ДУЖКИ ЦЕ ЯК КЛЮЧ ОБ'ЄКТА, ПІСЛЯ НИХ МОЖНА СТАВИТИ : (умовно)
@@ -66,6 +70,21 @@ const ShopContextProvider = (props) => {
   };
   //////////////////////////////////////////////////
 
+  const updateCartProduct = (oldSize, newSize, productId) => {
+    let cartData = structuredClone(cartItems);
+
+    if (cartData[productId][oldSize]) {
+      cartData[productId][newSize] = cartData[productId][oldSize];
+      delete cartData[productId][oldSize];
+
+      setCartItems(cartData);
+      toast.success("Product was updated");
+    } else {
+      toast.success("Product wasn't updated");
+    }
+  };
+  //////////////////////////////////////////////////
+
   const getCartCount = () => {
     let totalCount = 0;
 
@@ -89,10 +108,6 @@ const ShopContextProvider = (props) => {
   };
 
   const updateQuantity = (itemId, size, quantity) => {
-    // if (quantity === "" || quantity < 1) {
-
-    // }
-
     let cartData = structuredClone(cartItems);
 
     cartData[itemId][size] = quantity;
@@ -117,6 +132,7 @@ const ShopContextProvider = (props) => {
     getCartCount,
     updateQuantity,
     removeAllCartProducts,
+    updateCartProduct,
   };
 
   return (
