@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 
 import { assets } from "../assets/assets";
@@ -7,6 +7,8 @@ import Title from "../components/Title";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
+  const navigate = useNavigate();
+
   const {
     products,
     currency,
@@ -69,7 +71,7 @@ const Cart = () => {
                       <p className="details__name">{productData.name}</p>
                       <div className="wrap-details__price-size">
                         <p className="details__price">
-                          {currency} {productData.price}
+                          {currency} {productData.price * item.quantity}
                         </p>
                         <div className="details__size">{item.size}</div>
                       </div>
@@ -135,7 +137,9 @@ const Cart = () => {
           </div>
           <div className="cart-total-box">
             <CartTotal />
-            <button>Proceed to checkout</button>
+            <button onClick={() => navigate("/place-order")}>
+              Proceed to checkout
+            </button>
           </div>
         </div>
       ) : (
