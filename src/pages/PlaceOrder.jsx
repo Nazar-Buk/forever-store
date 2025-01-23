@@ -65,14 +65,14 @@ const PlaceOrder = () => {
   };
 
   return (
-    <section className="order-page">
-      <div className="order__container">
+    <section className="payment-page">
+      <div className="payment__container">
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="order__body"
+          className="payment__body"
         >
-          <div className="order__delivery-info">
+          <div className="payment__delivery-info">
             <Title text1="Delivery " text2="Information" />
             <div className="delivery-info__form-fields">
               <div className="wrap-short-fields">
@@ -178,7 +178,7 @@ const PlaceOrder = () => {
               </div>
             </div>
           </div>
-          <div className="order__payment-methods-and-cart-totals">
+          <div className="payment__methods-and-cart-totals">
             <CartTotal />
             <Title text1="Payment " text2="Method" />
             <div className="payments-group">
@@ -228,13 +228,13 @@ const PlaceOrder = () => {
             <button
               onClick={() => {
                 if (isDirty && isValid && !isSubmitting) {
-                  navigate("/orders");
+                  navigate("/payments");
                 }
               }}
               disabled={isSubmitting}
               type="submit"
             >
-              Place Order
+              Place payment
             </button>
           </div>
         </form>
