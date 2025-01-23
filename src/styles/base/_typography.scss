@@ -139,6 +139,21 @@ button {
       color: v.$btn-color;
     }
   }
+
+  &.secondary-btn {
+    font-size: 20px;
+    font-weight: 400;
+    color: #454545;
+    background-color: v.$primary-color;
+    border: 1px solid v.$border-color;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: v.$accent-color;
+      color: v.$primary-color;
+      border: 1px solid v.$accent-color;
+    }
+  }
 }
 
 input {

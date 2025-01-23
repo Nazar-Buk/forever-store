@@ -62,7 +62,10 @@ $accent-color: #000000;
 // extra colors
 $border-color: #adadad;
 $color-error: #e74c3c;
-$active-color: orange;
+$color-success: #00a625;
+$pending-color: orange;
+
+$active-color: $pending-color;
 
 // ############################ COMPONENTS ############################
 
