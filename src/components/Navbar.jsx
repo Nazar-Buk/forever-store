@@ -56,7 +56,9 @@ const Header = () => {
             <img src={assets.search_icon} alt="search" />
           </Link>
           <div className="wrap-icon profile">
-            <img src={assets.profile_icon} alt="profile-icon" />
+            <Link to="/login">
+              <img src={assets.profile_icon} alt="profile-icon" />
+            </Link>
             <div className="profile__menu">
               <p className="profile__item">My Profile</p>
               <p className="profile__item">Orders</p>

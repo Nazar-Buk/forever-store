@@ -61,6 +61,10 @@ header.header__container {
         cursor: pointer;
 
         &.profile {
+          a {
+            display: inline-block;
+          }
+
           &:hover .profile__menu {
             display: block;
             position: absolute;
