@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import Title from "../components/Title";
+import Newsletter from "../components/Newsletter";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Login"); // Sign Up  // Login
@@ -131,6 +132,7 @@ const Login = () => {
               </button>
             </form>
           </div>
+          <Newsletter />
         </div>
       </div>
     </section>
