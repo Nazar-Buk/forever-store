@@ -132,9 +132,9 @@ const Login = () => {
               </button>
             </form>
           </div>
-          <Newsletter />
         </div>
       </div>
+      <Newsletter />
     </section>
   );
 };
