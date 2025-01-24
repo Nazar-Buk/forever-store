@@ -75,7 +75,10 @@ const ShopContextProvider = (props) => {
 
     if (cartData[productId][oldSize]) {
       cartData[productId][newSize] = cartData[productId][oldSize];
-      delete cartData[productId][oldSize];
+
+      if (oldSize !== newSize) {
+        delete cartData[productId][oldSize];
+      }
 
       setCartItems(cartData);
       toast.success("Product was updated");
