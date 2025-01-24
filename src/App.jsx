@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div>
       {/* так підключив нотифікації до апки, а вже в конкретному випадку на сторінках використовуй toast*/}
-      <ToastContainer />
+      <ToastContainer position="top-center" autoClose={1800} />
       <Navbar />
       <SearchBar />
       <main>

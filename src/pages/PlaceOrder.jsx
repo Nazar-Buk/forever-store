@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -238,7 +238,7 @@ const PlaceOrder = () => {
             </button>
           </div>
         </form>
-        <DevTool control={control} />
+        {/* <DevTool control={control} /> */}
       </div>
     </section>
   );
