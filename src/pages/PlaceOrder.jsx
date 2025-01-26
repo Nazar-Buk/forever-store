@@ -228,7 +228,7 @@ const PlaceOrder = () => {
             <button
               onClick={() => {
                 if (isDirty && isValid && !isSubmitting) {
-                  navigate("/payments");
+                  navigate("/orders");
                 }
               }}
               disabled={isSubmitting}
