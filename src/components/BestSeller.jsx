@@ -1,18 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../context/ShopContext";
+import { useEffect, useState } from "react";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
 
-const BestSeller = () => {
-  const { products } = useContext(ShopContext);
+const BestSeller = ({ products }) => {
   const [bestSeller, setBestSeller] = useState([]);
 
   useEffect(() => {
     const bestProducts = products.filter((item) => item.bestseller);
     setBestSeller(bestProducts.slice(0, 5));
   }, [products]);
-
-  console.log(products, "productsDATA");
 
   return (
     <section className="best-sellers">
