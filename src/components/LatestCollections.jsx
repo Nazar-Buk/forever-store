@@ -9,7 +9,7 @@ const LatestCollections = () => {
 
   useEffect(() => {
     setLatestProducts(products.slice(0, 10));
-  }, []);
+  }, [products]);
 
   return (
     <section className="latest-collection">
@@ -25,7 +25,7 @@ const LatestCollections = () => {
               <ProductItem
                 key={item._id}
                 id={item._id}
-                image={item.image}
+                images={item.images}
                 price={item.price}
                 name={item.name}
               />

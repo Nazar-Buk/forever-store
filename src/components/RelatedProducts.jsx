@@ -37,7 +37,7 @@ const RelatedProducts = (props) => {
               <ProductItem
                 key={item._id}
                 id={item._id}
-                image={item.image}
+                images={item.images}
                 price={item.price}
                 name={item.name}
                 setSize={setSize}
