@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
+import Loader from "../components/Loader";
 
 const Collection = () => {
-  const { products, search, showSearch } = useContext(ShopContext);
+  const { products, search, showSearch, isLoading, setIsLoading } =
+    useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(true);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -88,11 +90,11 @@ const Collection = () => {
 
   useEffect(() => {
     setFilterProducts(products);
-  }, []);
+  }, [products]);
 
   useEffect(() => {
     applyFilters();
-  }, [subCategory, category, search]);
+  }, [subCategory, category, search, products]);
 
   useEffect(() => {
     sortProducts();
@@ -100,6 +102,7 @@ const Collection = () => {
 
   return (
     <section className="collection-page">
+      {isLoading && <Loader />}
       <div className="collection-page__container collection-page__body">
         <div className="filter-options">
           <div
@@ -242,7 +245,7 @@ const Collection = () => {
               <ProductItem
                 key={item._id}
                 id={item._id}
-                image={item.image}
+                images={item.images}
                 price={item.price}
                 name={item.name}
               />

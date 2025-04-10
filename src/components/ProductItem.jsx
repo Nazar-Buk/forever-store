@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { ShopContext } from "../context/ShopContext";
 
-const ProductItem = ({ id, image, price, name, setSize }) => {
+const ProductItem = ({ id, images, price, name, setSize }) => {
   const { productId } = useParams(); // потім треба буде коли буде бек і база даних
   const { currency } = useContext(ShopContext);
 
@@ -14,7 +14,7 @@ const ProductItem = ({ id, image, price, name, setSize }) => {
       to={`/product/${id}`}
     >
       <div className="wrap-product-card__img">
-        <img src={image[0]} alt="Product picture" />
+        <img src={images[0].url} alt="Product picture" />
       </div>
       <p className="product-card__name">{name}</p>
       <p className="product-card__price">

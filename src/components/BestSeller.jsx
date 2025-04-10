@@ -10,7 +10,9 @@ const BestSeller = () => {
   useEffect(() => {
     const bestProducts = products.filter((item) => item.bestseller);
     setBestSeller(bestProducts.slice(0, 5));
-  }, []);
+  }, [products]);
+
+  console.log(products, "productsDATA");
 
   return (
     <section className="best-sellers">
@@ -26,7 +28,7 @@ const BestSeller = () => {
               <ProductItem
                 key={item._id}
                 id={item._id}
-                image={item.image}
+                images={item.images}
                 price={item.price}
                 name={item.name}
               />

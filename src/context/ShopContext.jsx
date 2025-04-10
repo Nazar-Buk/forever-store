@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
-import { products } from "../assets/assets";
+// import { products } from "../assets/assets";
 
 export const ShopContext = createContext(); // створюємо контекст
 
@@ -9,9 +10,13 @@ const ShopContextProvider = (props) => {
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const currency = "$";
   const delivery_fee = 10; // вартість доставки
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const desiredSizesOrder = ["S", "M", "L", "XL", "XXL"];
 
   const addToCart = async (itemId, size) => {
     if (!size) {
@@ -139,6 +144,34 @@ const ShopContextProvider = (props) => {
     return totalAmount;
   };
 
+  const getProductsData = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get(backendUrl + "/api/product/list");
+
+      if (response.data.success) {
+        setIsLoading(false);
+
+        setProducts(response.data.products);
+        toast.success(response.data.message);
+      } else {
+        setIsLoading(false);
+
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+
+      console.log(error, "error");
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getProductsData();
+  }, []);
+
   const value = {
     products,
     currency,
@@ -154,6 +187,10 @@ const ShopContextProvider = (props) => {
     removeAllCartProducts,
     updateCartProduct,
     getCartAmount,
+    backendUrl,
+    desiredSizesOrder,
+    isLoading,
+    setIsLoading,
   };
 
   return (
