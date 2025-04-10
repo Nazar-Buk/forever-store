@@ -1,17 +1,46 @@
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
 import Loader from "../components/Loader";
 
 const Collection = () => {
-  const { products, search, showSearch, isLoading, setIsLoading } =
+  const { search, showSearch, isLoading, setIsLoading, backendUrl } =
     useContext(ShopContext);
+  const [products, setProducts] = useState([]);
+
   const [showFilter, setShowFilter] = useState(true);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
+
+  const getProductsData = async () => {
+    try {
+      setIsLoading(true);
+
+      const response = await axios.get(backendUrl + "/api/product/list");
+
+      if (response.data.success) {
+        setIsLoading(false);
+
+        setProducts(response.data.products);
+        toast.success(response.data.message);
+      } else {
+        setIsLoading(false);
+
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+
+      console.log(error, "error");
+      toast.error(error.message);
+    }
+  };
 
   const toggleCategory = (e) => {
     const { value } = e.target;
@@ -87,6 +116,10 @@ const Collection = () => {
         break;
     }
   };
+
+  useEffect(() => {
+    getProductsData();
+  }, []);
 
   useEffect(() => {
     setFilterProducts(products);
