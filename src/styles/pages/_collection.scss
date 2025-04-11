@@ -3,7 +3,8 @@
 section.collection-page {
   .collection-page__container.collection-page__body {
     margin-top: clamp(1.875rem, 1rem + 4.38vw, 6.25rem); // 100px
-    margin-bottom: clamp(2.5rem, -1.688rem + 20.94vw, 23.438rem); // 375px
+    // margin-bottom: clamp(2.5rem, -1.688rem + 20.94vw, 23.438rem); // 375px
+    margin-bottom: 20px;
     display: flex;
     gap: 40px;
 
@@ -115,9 +116,20 @@ section.collection-page {
       }
 
       .product__cards {
+        justify-content: start;
+
         a.product-card {
         }
       }
     }
+  }
+
+  .wrap-pagination {
+    margin-top: 60px;
+    border-top: 1px solid v.$border-color;
+    display: flex;
+    justify-content: end;
+    margin-bottom: clamp(2.5rem, -1.688rem + 20.94vw, 23.438rem);
+    padding-right: 30px;
   }
 }
