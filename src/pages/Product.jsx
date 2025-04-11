@@ -47,6 +47,8 @@ const Product = () => {
     // });
 
     try {
+      setIsLoading(true);
+
       const response = await axios.post(backendUrl + "/api/product/single", {
         productId,
         // productId: "67f50cbae3550da216e4c393",
@@ -55,11 +57,16 @@ const Product = () => {
       console.log(response, "response");
       if (response.data.success) {
         setProductData(response.data.product);
+        setIsLoading(false);
       } else {
+        setIsLoading(false);
+
         toast.error(response.data.message);
       }
     } catch (error) {
       console.log(error, "error");
+      setIsLoading(false);
+
       toast.error(error.response.data.message);
     }
   };

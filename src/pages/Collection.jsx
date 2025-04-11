@@ -1,33 +1,46 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSearchParams } from "react-router-dom";
 
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
 import Loader from "../components/Loader";
+import Pagination from "../components/Pagination";
 
 const Collection = () => {
   const { search, showSearch, isLoading, setIsLoading, backendUrl } =
     useContext(ShopContext);
-  const [products, setProducts] = useState([]);
 
+  const [searchParams, setSearchParams] = useSearchParams(); // ця шляпа вміє працювати із адресною строкою
+  // отримую дані із лінки, ті що після ? і тих &...
+  const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
+  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 10);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const [products, setProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(true);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
-  const getProductsData = async () => {
+  const getProductsData = async (currentPage, currentLimit) => {
     try {
       setIsLoading(true);
 
-      const response = await axios.get(backendUrl + "/api/product/list");
+      const response = await axios.get(
+        backendUrl +
+          `/api/product/list?page=${currentPage}&limit=${currentLimit}`
+      ); // на беку це треба отримувати так { page: '1', limit: '10' } req.query
 
       if (response.data.success) {
         setIsLoading(false);
 
         setProducts(response.data.products);
+        setTotalCount(response.data.totalCount);
+
         toast.success(response.data.message);
       } else {
         setIsLoading(false);
@@ -118,8 +131,10 @@ const Collection = () => {
   };
 
   useEffect(() => {
-    getProductsData();
-  }, []);
+    getProductsData(page, limit);
+    // Встановлюємо параметри в URL при зміні сторінки або ліміту
+    setSearchParams({ page, limit });
+  }, [page, limit, setSearchParams]);
 
   useEffect(() => {
     setFilterProducts(products);
@@ -285,6 +300,15 @@ const Collection = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="wrap-pagination">
+        <Pagination
+          page={page}
+          setPage={setPage}
+          limit={limit}
+          setLimit={setLimit}
+          totalCount={totalCount}
+        />
       </div>
     </section>
   );
