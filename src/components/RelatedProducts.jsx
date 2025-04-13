@@ -1,31 +1,29 @@
-import { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
 
 const RelatedProducts = (props) => {
-  const { productData, setSize } = props;
+  const { relatedProducts, setSize } = props;
 
-  const { products } = useContext(ShopContext);
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  // залишив на память =)
+  // useEffect(() => {
+  //   if (products.length > 0) {
+  //     let productsCopy = products.slice();
 
-  useEffect(() => {
-    if (products.length > 0) {
-      let productsCopy = products.slice();
+  //     productsCopy = productsCopy.filter((item) => {
+  //       if (
+  //         item.category === productData.category &&
+  //         item.subCategory === productData.subCategory &&
+  //         item._id !== productData._id
+  //       ) {
+  //         return item;
+  //       }
+  //     });
 
-      productsCopy = productsCopy.filter((item) => {
-        if (
-          item.category === productData.category &&
-          item.subCategory === productData.subCategory &&
-          item._id !== productData._id
-        ) {
-          return item;
-        }
-      });
+  //     setRelatedProducts(productsCopy.slice(0, 5));
+  //   }
+  // }, [productData]);
 
-      setRelatedProducts(productsCopy.slice(0, 5));
-    }
-  }, [productData]);
+  console.log(relatedProducts, "relatedProducts");
 
   return (
     <section className="related-products">

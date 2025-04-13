@@ -14,60 +14,92 @@ const Product = () => {
 
   const { productId } = useParams(); // потім треба буде коли буде бек і база даних
   const location = useLocation(); // location.state Так отримувати стейт через Link
-  // console.log(location, "location");
-  // console.log(productId, "productId");
+
   const {
     desiredSizesOrder,
     currency,
     addToCart,
     updateCartProduct,
     backendUrl,
-    isLoading,
-    setIsLoading,
   } = useContext(ShopContext);
 
   const smallPicturesBoxRef = useRef(null);
 
-  // const [productData, setProductData] = useState(false); // було false
   const [productData, setProductData] = useState({}); // було false
   const [image, setImage] = useState("");
   const [size, setSize] = useState(location.state || "");
   const [isScrollable, setIsScrollable] = useState(false);
-  // console.log(productData, "productData");
-  console.log(image, "image");
+  const [loadingState, setLoadingState] = useState({
+    isLoadingProductData: true,
+    isLoadingRelatedProductsData: true,
+  });
+
+  const [relatedProducts, setRelatedProducts] = useState([]);
+
+  const isLoading =
+    loadingState.isLoadingProductData ||
+    loadingState.isLoadingRelatedProductsData;
 
   const fetchProductData = async () => {
-    // to do: можливо краще використати find
-    // products.map((item) => {
-    //   if (item._id === productId) {
-    //     setProductData(item);
-    //     setImage(item.images[0].url);
-    //     return null;
-    //   }
-    // });
-
     try {
-      setIsLoading(true);
+      setLoadingState((prev) => ({ ...prev, isLoadingProductData: true }));
 
       const response = await axios.post(backendUrl + "/api/product/single", {
         productId,
         // productId: "67f50cbae3550da216e4c393",
       });
 
-      console.log(response, "response");
       if (response.data.success) {
         setProductData(response.data.product);
-        setIsLoading(false);
+        setLoadingState((prev) => ({ ...prev, isLoadingProductData: false }));
       } else {
-        setIsLoading(false);
+        setLoadingState((prev) => ({ ...prev, isLoadingProductData: false }));
 
         toast.error(response.data.message);
       }
     } catch (error) {
       console.log(error, "error");
-      setIsLoading(false);
+      setLoadingState((prev) => ({ ...prev, isLoadingProductData: false }));
 
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const getRelatedProducts = async () => {
+    try {
+      setLoadingState((prev) => ({
+        ...prev,
+        isLoadingRelatedProductsData: true,
+      }));
+
+      const response = await axios.post(backendUrl + "/api/product/related", {
+        category: productData?.category,
+        subCategory: productData?.subCategory,
+        productId: productData?._id,
+      });
+
+      console.log(response, "response");
+
+      if (response.data.success) {
+        setRelatedProducts(response.data.relatedProductsForSection);
+        setLoadingState((prev) => ({
+          ...prev,
+          isLoadingRelatedProductsData: false,
+        }));
+      }
+
+      setLoadingState((prev) => ({
+        ...prev,
+        isLoadingRelatedProductsData: false,
+      }));
+    } catch (error) {
+      console.log(error, "error");
+      setLoadingState((prev) => ({
+        ...prev,
+        isLoadingRelatedProductsData: false,
+      }));
+
+      toast.error(error.response?.data?.message || "Something went wrong!");
     }
   };
 
@@ -82,10 +114,6 @@ const Product = () => {
       setIsScrollable(false);
     }
   };
-
-  // useEffect(() => {
-  //   fetchProductData();
-  // }, [productId, products]);
 
   useEffect(() => {
     fetchProductData();
@@ -103,11 +131,12 @@ const Product = () => {
       setImage(productData.images[0].url);
     }
 
+    if (productData.category && productData.subCategory && productData._id) {
+      getRelatedProducts();
+    }
+
     return () => window.removeEventListener("resize", checkIfScrollableBox);
   }, [productData, productId]);
-
-  console.log(productData?.sizes, "productData?.sizes");
-  console.log(productData, "productData");
 
   const sortedProductSizes = productData.sizes?.sort(
     (a, b) => desiredSizesOrder.indexOf(a) - desiredSizesOrder.indexOf(b)
@@ -291,7 +320,10 @@ const Product = () => {
               </div>
             </div>
           </section>
-          <RelatedProducts productData={productData} setSize={setSize} />
+          <RelatedProducts
+            relatedProducts={relatedProducts}
+            setSize={setSize}
+          />
         </section>
       ) : (
         <div>No Products!</div>

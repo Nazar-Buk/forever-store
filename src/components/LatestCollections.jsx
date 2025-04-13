@@ -1,15 +1,7 @@
-import { useEffect, useState } from "react";
-
 import Title from "./Title";
 import ProductItem from "./ProductItem";
 
-const LatestCollections = ({ products }) => {
-  const [latestProducts, setLatestProducts] = useState([]);
-
-  useEffect(() => {
-    setLatestProducts(products.slice(0, 10));
-  }, [products]);
-
+const LatestCollections = ({ latestProducts }) => {
   return (
     <section className="latest-collection">
       <div className="latest-collection__container">
