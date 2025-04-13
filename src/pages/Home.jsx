@@ -11,45 +11,100 @@ import Loader from "../components/Loader";
 import { ShopContext } from "../context/ShopContext";
 
 const Home = () => {
-  const { isLoading, setIsLoading, backendUrl } = useContext(ShopContext);
-  const [products, setProducts] = useState([]);
+  const { backendUrl } = useContext(ShopContext);
 
-  const getProductsData = async () => {
+  const [loadingState, setLoadingState] = useState({
+    isLoadingBestsellers: true,
+    isLoadingLatestProducts: true,
+  });
+
+  const [bestsellers, setBestsellers] = useState([]);
+  const [latestProducts, setLatestProducts] = useState([]);
+
+  const getBestsellers = async () => {
     try {
-      setIsLoading(true);
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isLoadingBestsellers: true,
+      }));
 
-      const response = await axios.get(backendUrl + "/api/product/list");
+      const response = await axios.get(backendUrl + "/api/product/bestsellers");
 
       if (response.data.success) {
-        setIsLoading(false);
+        setBestsellers(response.data.bestsellersForSection);
 
-        setProducts(response.data.products);
-        toast.success(response.data.message);
-      } else {
-        setIsLoading(false);
-
-        toast.error(response.data.message);
+        setLoadingState((prevState) => ({
+          ...prevState,
+          isLoadingBestsellers: false,
+        }));
       }
-    } catch (error) {
-      setIsLoading(false);
 
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isLoadingBestsellers: false,
+      }));
+    } catch (error) {
       console.log(error, "error");
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || "Something went wrong!");
+
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isLoadingBestsellers: false,
+      }));
+    }
+  };
+
+  const getLatestProducts = async () => {
+    try {
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isLoadingLatestProducts: true,
+      }));
+
+      const response = await axios.get(
+        backendUrl + "/api/product/latest-products"
+      );
+
+      if (response.data.success) {
+        setLatestProducts(response.data.latestProductsForSection);
+
+        setLoadingState((prevState) => ({
+          ...prevState,
+          isLoadingLatestProducts: false,
+        }));
+      }
+
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isLoadingLatestProducts: false,
+      }));
+    } catch (error) {
+      console.log(error, "error");
+      toast.error(error.response?.data?.message || "Something went wrong!");
+
+      setLoadingState((prevState) => ({
+        ...prevState,
+        isLoadingLatestProducts: false,
+      }));
     }
   };
 
   useEffect(() => {
-    getProductsData();
+    getBestsellers();
+    getLatestProducts();
   }, []);
+
+  const isLoading =
+    loadingState.isLoadingBestsellers || loadingState.isLoadingLatestProducts;
 
   return (
     <div className="home-page">
       {isLoading && <Loader />}
       <Hero />
-      <LatestCollections products={products} />
-      <BestSeller products={products} />
-      <OurPolicy products={products} />
-      <Newsletter products={products} />
+      <LatestCollections latestProducts={latestProducts} />
+      <BestSeller bestsellers={bestsellers} />
+      <OurPolicy />
+      <Newsletter />
     </div>
   );
 };

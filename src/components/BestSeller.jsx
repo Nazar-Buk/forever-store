@@ -1,15 +1,7 @@
-import { useEffect, useState } from "react";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
 
-const BestSeller = ({ products }) => {
-  const [bestSeller, setBestSeller] = useState([]);
-
-  useEffect(() => {
-    const bestProducts = products.filter((item) => item.bestseller);
-    setBestSeller(bestProducts.slice(0, 5));
-  }, [products]);
-
+const BestSeller = ({ bestsellers }) => {
   return (
     <section className="best-sellers">
       <div className="best-sellers__container">
@@ -20,7 +12,7 @@ const BestSeller = ({ products }) => {
             industry. Lorem Ipsum has been the.
           </p>
           <div className="product__cards">
-            {bestSeller.map((item) => (
+            {bestsellers.map((item) => (
               <ProductItem
                 key={item._id}
                 id={item._id}
