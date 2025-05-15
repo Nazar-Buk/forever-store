@@ -95,7 +95,7 @@ $h5-font-weight: 400;
 
 $h6-color: #212121;
 $h6-font-size: 16px;
-$h6-font-weight: 400;
+$h6-font-weight: 600;
 
 // #### Paragraph ####
 $paragraph-color: #868686;
@@ -118,6 +118,21 @@ $product-card-name-color: #494949;
 $product-card-price-font-size: 16px;
 $product-card-price-font-weight: 500;
 $product-card-price-color: #494949;
+
+// #### Custom Select ####
+$select-adornment-width: 14px;
+$select-adornment-color: #cccccc;
+$select-border: 1px solid #cccccc;
+
+$select-padding-right: 35px;
+$select-padding: 10px $select-padding-right 10px 10px;
+$select-width: 250px;
+
+$select-items-border: 1px solid $secondary-color;
+$select-items-bg: $primary-color;
+
+$select-items-bg-hover: $secondary-color;
+$select-items-color-hover: $primary-color;
 
 // ############################ END COMPONENTS ############################
 
@@ -219,6 +234,7 @@ $cross-icon-size: 15px;
 
 $filter-category-border: 1px solid #c8c8c8;
 $select-sorting-border: 1px solid #c8c8c8;
+$filters-border: 1px solid #c8c8c8;
 $select-sorting-arrow-size: 14px;
 $select-color: $accent-color;
 

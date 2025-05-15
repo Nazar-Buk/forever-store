@@ -5,12 +5,12 @@
   gap: 28px;
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 260px);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
 
   a.product-card {
     display: block;
-    max-width: 260px;
+    max-width: 100%;
     margin-bottom: 17px;
 
     .wrap-product-card__img {

@@ -8,56 +8,68 @@ section.collection-page {
     display: flex;
     gap: 40px;
 
-    .filter-options {
-      margin-top: 33px;
+    .filter-options__box {
+      border-right: v.$filters-border;
 
-      .wrap-filter-heading {
-        h5 {
+      .filter-options {
+        align-self: flex-start;
+        margin-top: 12px;
+        padding-right: 30px;
+
+        position: sticky;
+        top: 50px;
+
+        .wrap-filter-heading {
+          margin-bottom: 30px;
+
+          h5 {
+          }
+          svg.drop-down-arrow {
+            display: none;
+          }
         }
-        svg.drop-down-arrow {
-          display: none;
-        }
 
-        margin-bottom: 20px;
-      }
+        form.filters-body {
+          .filter-item-box {
+            h6 {
+              margin-bottom: 20px;
+            }
 
-      .categories-body {
-        .category-box {
-          border: v.$filter-category-border;
-          width: 315px;
-          padding: 14px 23px;
-          margin-bottom: 23px;
+            .custom-select {
+            }
 
-          h6.category__title {
-            margin-bottom: 25px;
+            .price__fields {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              .price__field {
+                .price__input {
+                  min-width: 50px;
+                  width: 115px;
+                  border: 1px solid #cccccc;
+                  padding: 12px;
+                  font-size: 16px;
+                }
+              }
+            }
+
+            p.error {
+              margin-top: 5px;
+            }
           }
 
-          .wrap-category-item {
+          .wrap-buttons {
+            margin-top: 40px;
             display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 13px;
-
-            input.category-item__checkbox {
-              width: 20px;
-              height: 20px;
-              cursor: pointer;
-            }
-
-            .category-item__name {
-              cursor: pointer;
-
-              color: v.$checkbox-name-color;
-              font-size: v.$checkbox-name-font-size;
-              font-weight: v.$checkbox-name-font-weight;
-            }
+            flex-direction: column;
+            gap: 10px;
           }
         }
       }
     }
 
     .collection__content {
-      max-width: 1130px;
       flex-grow: 1;
 
       .collection-content__settings {
@@ -116,8 +128,6 @@ section.collection-page {
       }
 
       .product__cards {
-        justify-content: start;
-
         a.product-card {
         }
       }
