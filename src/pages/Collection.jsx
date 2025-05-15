@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
@@ -9,10 +9,16 @@ import ProductItem from "../components/ProductItem";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import CollectionsFilters from "../components/CollectionsFilters";
+import { assets } from "../../src/assets/assets";
 
 const Collection = () => {
-  const { search, showSearch, isLoading, setIsLoading, backendUrl } =
-    useContext(ShopContext);
+  const { search, showSearch, backendUrl } = useContext(ShopContext);
+  const productsSectionRef = useRef(null);
+
+  const [isLoadingState, setIsLoadingState] = useState({
+    isProductsLoading: true,
+    isCategoryLoading: true,
+  });
 
   const [searchParams, setSearchParams] = useSearchParams(); // ця шляпа вміє працювати із адресною строкою
   // отримую дані із лінки, ті що після ? і тих &...
@@ -27,13 +33,12 @@ const Collection = () => {
   );
   const [priceTo, setPriceTo] = useState(searchParams.get("priceTo") || "");
 
+  const [sort, setSort] = useState(searchParams.get("sort") || "date_new");
+
   const [totalCount, setTotalCount] = useState(0);
 
   const [products, setProducts] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
-
-  const [filterProducts, setFilterProducts] = useState([]);
-  const [sortType, setSortType] = useState("relevant");
 
   const getProductsData = async (
     currentPage,
@@ -41,10 +46,12 @@ const Collection = () => {
     categoryData,
     subCategoryData,
     priceFromData,
-    priceToData
+    priceToData,
+    sortData,
+    searchData
   ) => {
     try {
-      setIsLoading(true);
+      setIsLoadingState((prev) => ({ ...prev, isProductsLoading: true }));
 
       let encodedCategoryData;
       let encodedSubCategory;
@@ -63,63 +70,68 @@ const Collection = () => {
 
       const response = await axios.get(
         backendUrl +
-          `/api/product/list?page=${currentPage}&limit=${currentLimit}&category=${encodedCategoryData}&subCategory=${encodedSubCategory}&priceFrom=${priceFromData}&priceTo=${priceToData}`
+          `/api/product/list?page=${currentPage}&limit=${currentLimit}&category=${encodedCategoryData}&subCategory=${encodedSubCategory}&priceFrom=${priceFromData}&priceTo=${priceToData}&sort=${sortData}&search=${searchData}`
       ); // на беку це треба отримувати так { page: '1', limit: '10' } req.query
 
       if (response.data.success) {
-        setIsLoading(false);
+        setIsLoadingState((prev) => ({ ...prev, isProductsLoading: false }));
 
         setProducts(response.data.products);
         setTotalCount(response.data.totalCount);
 
         toast.success(response.data.message);
       } else {
-        setIsLoading(false);
+        setIsLoadingState((prev) => ({ ...prev, isProductsLoading: false }));
 
         toast.error(response.data.message);
       }
     } catch (error) {
-      setIsLoading(false);
+      setIsLoadingState((prev) => ({ ...prev, isProductsLoading: false }));
 
       console.log(error, "error");
       toast.error(error.message);
     }
   };
 
-  const sortProducts = () => {
-    let fpCopy = filterProducts.slice(); //filteredProducts copy
-
-    switch (sortType) {
-      case "low-high":
-        setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
-        break;
-      case "high-low":
-        setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
-        break;
-      default:
-        // applyFilters();
-
-        break;
-    }
-  };
-
   useEffect(() => {
-    getProductsData(page, limit, category, subCategory, priceFrom, priceTo);
+    getProductsData(
+      page,
+      limit,
+      category,
+      subCategory,
+      priceFrom,
+      priceTo,
+      sort,
+      search
+    );
     // Встановлюємо параметри в URL при зміні сторінки або ліміту
-    setSearchParams({ page, limit, category, subCategory, priceFrom, priceTo });
-  }, [page, limit, category, subCategory, priceFrom, priceTo, setSearchParams]);
+    setSearchParams({
+      page,
+      limit,
+      category,
+      subCategory,
+      priceFrom,
+      priceTo,
+      sort,
+      search,
+    });
+  }, [
+    page,
+    limit,
+    category,
+    subCategory,
+    priceFrom,
+    priceTo,
+    sort,
+    search,
+    setSearchParams,
+  ]);
 
-  useEffect(() => {
-    setFilterProducts(products);
-  }, [products]);
-
-  useEffect(() => {
-    sortProducts();
-  }, [sortType]);
+  const isLoading =
+    isLoadingState.isCategoryLoading || isLoadingState.isProductsLoading;
 
   return (
     <section className="collection-page">
-      {isLoading && <Loader />}
       <div className="collection-page__container collection-page__body">
         <div className="filter-options__box">
           <div className="filter-options">
@@ -174,35 +186,55 @@ const Collection = () => {
               setPriceFrom={setPriceFrom}
               priceTo={priceTo}
               setPriceTo={setPriceTo}
+              setIsLoadingState={setIsLoadingState}
+              productsSectionRef={productsSectionRef}
             />
           </div>
         </div>
         <div className="collection__content">
-          <div className="collection-content__settings">
+          <div
+            ref={productsSectionRef}
+            className="collection-content__settings"
+          >
             <Title text1="All " text2="Collections" />
             <div className="wrap-sorting-select">
               <select
-                onChange={(e) => setSortType(e.target.value)}
+                onChange={(e) => setSort(e.target.value)}
                 className="sorting-box"
                 name="sorting"
+                defaultValue={sort}
               >
-                <option value="relevant">Sort by: Relevant</option>
-                <option value="low-high">Sort by: Low to High</option>
-                <option value="high-low">Sort by: High to Low</option>
+                <option value="date_new">Sort by: Newest</option>
+                <option value="date_old">Sort by: Oldest</option>
+                <option value="price_asc">Sort by: Low to High</option>
+                <option value="price_desc">Sort by: High to Low</option>
               </select>
             </div>
           </div>
-          <div className="product__cards">
-            {products?.map((item) => (
-              <ProductItem
-                key={item._id}
-                id={item._id}
-                images={item.images}
-                price={item.price}
-                name={item.name}
-              />
-            ))}
-          </div>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              {products.length ? (
+                <div className="product__cards">
+                  {products?.map((item) => (
+                    <ProductItem
+                      key={item._id}
+                      id={item._id}
+                      images={item.images}
+                      price={item.price}
+                      name={item.name}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-page">
+                  <h2>No Products</h2>
+                  <img src={assets.empty_products} alt="no product" />
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
       <div className="wrap-pagination">

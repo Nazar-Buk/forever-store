@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
@@ -7,7 +8,9 @@ import axios from "axios";
 export const ShopContext = createContext(); // створюємо контекст
 
 const ShopContextProvider = (props) => {
-  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams(); // ця шляпа вміє працювати із адресною строкою
+
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);

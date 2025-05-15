@@ -1,3 +1,5 @@
+// Більшість із цих картинок не треба, але зай буде для прикладу
+
 import p_img1 from "./p_img1.png";
 import p_img2_1 from "./p_img2_1.png";
 import p_img2_2 from "./p_img2_2.png";
@@ -80,6 +82,7 @@ import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
 import error_404 from "./error_404.gif";
 import empty_cart from "./empty_cart.png";
+import empty_products from "./empty_products.jpg";
 
 export const assets = {
   logo,
@@ -102,6 +105,7 @@ export const assets = {
   cross_icon,
   error_404,
   empty_cart,
+  empty_products,
 };
 
 export const products = [

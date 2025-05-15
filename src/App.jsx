@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
+import ShopContextProvider from "./context/ShopContext.jsx";
+
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
@@ -24,18 +26,20 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <NetworkStatus />
-      {isLoading && <Loader />}
-      {/* так підключив нотифікації до апки, а вже в конкретному випадку на сторінках використовуй toast*/}
-      <ToastContainer position="top-center" autoClose={1800} />
-      <Navbar />
-      <SearchBar />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <ShopContextProvider>
+      <div>
+        <NetworkStatus />
+        {isLoading && <Loader />}
+        {/* так підключив нотифікації до апки, а вже в конкретному випадку на сторінках використовуй toast*/}
+        <ToastContainer position="top-center" autoClose={1800} />
+        <Navbar />
+        <SearchBar />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </ShopContextProvider>
   );
 };
 

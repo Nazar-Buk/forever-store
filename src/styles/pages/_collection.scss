@@ -127,6 +127,21 @@ section.collection-page {
         }
       }
 
+      .empty-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+          text-align: center;
+        }
+        img {
+          max-width: 50%;
+          aspect-ratio: 1/1;
+        }
+      }
+
       .product__cards {
         a.product-card {
         }

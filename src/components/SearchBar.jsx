@@ -4,15 +4,16 @@ import { assets } from "../assets/assets";
 import { useLocation } from "react-router-dom";
 
 const SearchBar = () => {
-  const { setSearch, showSearch, setShowSearch } = useContext(ShopContext);
+  const { search, setSearch, showSearch, setShowSearch } =
+    useContext(ShopContext);
 
   const location = useLocation();
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const [searchData, setSearchData] = useState("");
+  const [searchValue, setSearchValue] = useState(search);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      setSearch(searchData);
+      setSearch(searchValue.trim());
     }
   };
 
@@ -34,13 +35,19 @@ const SearchBar = () => {
               id="search-input"
               type="text"
               placeholder="Search"
-              value={searchData}
-              onChange={(e) => setSearchData(e.target.value)}
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+
+                if (e.target.value === "") {
+                  setSearch("");
+                }
+              }}
               onKeyDown={handleKeyDown}
             />
             <div
               onClick={() => {
-                setSearch(searchData);
+                setSearch(searchValue.trim());
               }}
               className="wrap-search-img"
             >
@@ -51,7 +58,7 @@ const SearchBar = () => {
           <div
             onClick={() => {
               setSearch("");
-              setSearchData("");
+              setSearchValue("");
               setShowSearch(false);
             }}
             className="wrap-close-search-img"

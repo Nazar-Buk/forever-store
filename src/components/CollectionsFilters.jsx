@@ -3,7 +3,9 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
+import { toast } from "react-toastify";
 
+import { scrollToSection } from "../utils/helpers.js";
 import CustomSelect from "./CustomSelect";
 
 const filtersSchema = yup.object({
@@ -67,6 +69,8 @@ const CollectionsFilters = (props) => {
     setPriceFrom,
     priceTo,
     setPriceTo,
+    setIsLoadingState,
+    productsSectionRef,
   } = props;
 
   const [isCategorySelectOpen, setIsCategorySelectOpen] = useState(false);
@@ -93,6 +97,7 @@ const CollectionsFilters = (props) => {
     form;
 
   const { errors } = formState;
+  console.log(errors, "errors");
 
   const selectedCategory = watch("category") || {};
   const selectedSubCategory = watch("subCategory") || {};
@@ -102,16 +107,14 @@ const CollectionsFilters = (props) => {
       (item) => item.categoryLabel === selectedCategory.optionLabel
     )?.subCategory || [];
 
-  const currentCategoryValue = categoryData?.find(
-    (item) => item.categoryLabel === category
-  )?.categoryValue;
-
-  const currentSubCategoryValue = subCategoryData?.find(
-    (item) => item.subCategoryLabel === subCategory
-  )?.subCategoryValue;
-
   const onSubmit = (data) => {
     // console.log(data, "data");
+
+    if (!Object.keys(errors).length) {
+      // Виконуємо якщо нема помилок
+
+      scrollToSection(productsSectionRef);
+    }
 
     setCategory(data.category.optionLabel);
     setSubCategory(data.subCategory.optionLabel);
@@ -121,12 +124,20 @@ const CollectionsFilters = (props) => {
 
   const fetchCategories = async () => {
     try {
+      setIsLoadingState((prev) => ({ ...prev, isCategoryLoading: true }));
+
       const response = await axios.get(backendUrl + "/api/category/list");
       if (response.data.success) {
         setCategoryData(response.data.allCategories);
+        setIsLoadingState((prev) => ({ ...prev, isCategoryLoading: false }));
+      } else {
+        setIsLoadingState((prev) => ({ ...prev, isCategoryLoading: false }));
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.log(error, "error");
+      setIsLoadingState((prev) => ({ ...prev, isCategoryLoading: false }));
+      toast.error(error.message);
     }
   };
 
@@ -153,6 +164,14 @@ const CollectionsFilters = (props) => {
   }, [selectedCategory]);
 
   useEffect(() => {
+    const currentCategoryValue = categoryData?.find(
+      (item) => item.categoryLabel === category
+    )?.categoryValue;
+
+    const currentSubCategoryValue = subCategoryData?.find(
+      (item) => item.subCategoryLabel === subCategory
+    )?.subCategoryValue;
+
     // тут reset, щоб useForm тримався в синхроні з URL, який оновлюється в батьківському компоненті. Інакше дані у формі будуть "застарілими".
     reset({
       category: {
@@ -166,7 +185,8 @@ const CollectionsFilters = (props) => {
       priceFrom: priceFrom || "",
       priceTo: priceTo || "",
     });
-  }, [category, subCategory, priceFrom, priceTo]);
+    // }
+  }, [categoryData, category, subCategory, priceFrom, priceTo]);
 
   useEffect(() => {
     if (selectedCategory.optionLabel.toLowerCase().includes("all")) {
