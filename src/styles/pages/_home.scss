@@ -115,6 +115,8 @@
 
         // here are cards
         .product__cards {
+          grid-template-columns: repeat(5, 1fr);
+
           a.product-card {
           }
         }
@@ -142,6 +144,8 @@
 
         // here are cards
         .product__cards {
+          grid-template-columns: repeat(5, 1fr);
+
           a.product-card {
           }
         }

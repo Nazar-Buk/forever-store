@@ -6,7 +6,6 @@ import { ShopContext } from "../context/ShopContext";
 const ProductItem = ({ id, images, price, name, setSize }) => {
   const { productId } = useParams(); // потім треба буде коли буде бек і база даних
   const { currency } = useContext(ShopContext);
-  console.log(images, "images");
 
   return (
     <Link

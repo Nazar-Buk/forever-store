@@ -1,5 +1,37 @@
 @use "../base/variables" as v;
 
+@media (max-width: 1100px) {
+  .home-page {
+    section.latest-collection {
+      .latest-collection__container {
+        .wrap-latest-collection__content {
+          // here are cards
+          .product__cards {
+            grid-template-columns: repeat(4, 1fr);
+
+            a.product-card {
+            }
+          }
+        }
+      }
+    }
+
+    section.best-sellers {
+      .best-sellers__container {
+        .wrap-best-sellers__content {
+          // here are cards
+          .product__cards {
+            grid-template-columns: repeat(4, 1fr);
+
+            a.product-card {
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 992px) {
   .home-page {
     section.hero {
@@ -46,6 +78,66 @@
             aspect-ratio: 614/491;
 
             img {
+            }
+          }
+        }
+      }
+    }
+
+    section.latest-collection {
+      .latest-collection__container {
+        .wrap-latest-collection__content {
+          // here are cards
+          .product__cards {
+            grid-template-columns: repeat(3, 1fr);
+
+            a.product-card {
+            }
+          }
+        }
+      }
+    }
+
+    section.best-sellers {
+      .best-sellers__container {
+        .wrap-best-sellers__content {
+          // here are cards
+          .product__cards {
+            grid-template-columns: repeat(3, 1fr);
+
+            a.product-card {
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .home-page {
+    section.latest-collection {
+      .latest-collection__container {
+        .wrap-latest-collection__content {
+          // here are cards
+          .product__cards {
+            grid-template-columns: repeat(2, 1fr);
+
+            a.product-card {
+            }
+          }
+        }
+      }
+    }
+
+    section.best-sellers {
+      .best-sellers__container {
+        .wrap-best-sellers__content {
+          // here are cards
+          .product__cards {
+            grid-template-columns: repeat(2, 1fr);
+
+            a.product-card {
             }
           }
         }
