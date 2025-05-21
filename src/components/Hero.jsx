@@ -14,7 +14,11 @@ const Hero = () => {
             </div>
           </div>
           <div className="hero__picture">
-            <img src={assets.hero_img} alt="banner picture" />
+            {/* <img src={assets.hero_img} alt="banner picture" /> */}
+            <video autoPlay muted loop>
+              <source src={assets.hero_video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>

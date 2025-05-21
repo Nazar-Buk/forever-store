@@ -1,13 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import Title from "../components/Title";
-import Newsletter from "../components/Newsletter";
+import Loader from "../components/Loader";
+import { ShopContext } from "../context/ShopContext";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [currentState, setCurrentState] = useState("Login"); // Sign Up  // Login
+  const { backendUrl, isLoading, setIsLoading } = useContext(ShopContext);
 
   const schema = yup.object({
     name: yup
@@ -36,8 +42,29 @@ const Login = () => {
       ),
     password: yup
       .string()
+      .required("This field is required!")
       .min(8, "Use 8 or more characters!")
-      .required("This field is required!"),
+      .test(
+        "password-strength",
+        "Password must include uppercase, lowercase, number and special character",
+        (value) => {
+          // Перевіряє, чи є хоча б одна велика літера (A–Z)
+          const hasUpperCase = /[A-Z]/.test(value);
+
+          // Перевіряє, чи є хоча б одна мала літера (a–z)
+          const hasLowerCase = /[a-z]/.test(value);
+
+          // Перевіряє, чи є хоча б одна цифра (0–9)
+          const hasNumber = /[0-9]/.test(value);
+
+          // Перевіряє, чи є хоча б один спеціальний символ із вказаного набору
+          // додай решітку
+          const hasSpecialChar = /[@$!%*?&]/.test(value);
+
+          // Повертає true тільки якщо всі умови вище виконані
+          return hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
+        }
+      ),
   });
 
   const form = useForm({
@@ -50,23 +77,50 @@ const Login = () => {
     mode: "onChange",
   });
 
-  const { register, handleSubmit, control, formState } = form;
+  const { register, handleSubmit, control, formState, reset } = form;
   const { errors, isDirty, isValid, isSubmitting } = formState;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data, "data from login");
-  };
 
-  // назнаю и це потрібно для валідації, працює і без неї
-  useEffect(() => {
-    schema
-      .validate({ name: "" })
-      .catch((err) => console.log(err.errors, " useEffect"));
-  }, [currentState]);
+    try {
+      setIsLoading(true);
+
+      const response = await axios.post(
+        backendUrl +
+          `/api/user/${currentState === "Login" ? "login" : "register"}`,
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          withCredentials: true, // важливо для роботи з cookie
+        }
+      );
+
+      if (response.data.success) {
+        console.log(response, "response SUCCESS");
+        setIsLoading(false);
+        toast.success("Successful registration!");
+        reset();
+        navigate("/");
+      } else {
+        console.log(response, "response FAILED");
+        setIsLoading(false);
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error, "error");
+      setIsLoading(false);
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <section className="login-page">
       <div className="login__container">
+        {isLoading && <Loader />}
         <div className="login__body">
           <Title text1="" text2={currentState} />
           <div className="form-box">
@@ -110,7 +164,7 @@ const Login = () => {
                 <div className="settings-box">
                   <p className="settings__text">Forgot your password?</p>
                   <p
-                    onClick={() => setCurrentState("Sing in")}
+                    onClick={() => setCurrentState("Sing Up")}
                     className="settings__text"
                   >
                     Create account
@@ -128,13 +182,13 @@ const Login = () => {
                 </div>
               )}
               <button type="submit">
-                {currentState === "Login" ? "Sign in" : "Create"}
+                {currentState === "Login" ? "Sign Up" : "Create"}
               </button>
             </form>
           </div>
         </div>
       </div>
-      <Newsletter />
+      {/* <Newsletter /> */}
     </section>
   );
 };

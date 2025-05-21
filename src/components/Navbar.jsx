@@ -1,8 +1,11 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import { assets } from "../assets/assets";
 import { ShopContext } from "../context/ShopContext";
+import Loader from "./Loader";
 
 const Header = () => {
   const location = useLocation();
@@ -10,7 +13,8 @@ const Header = () => {
 
   const [visible, setVisible] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  const { setShowSearch, getCartCount, isLoading, setIsLoading, backendUrl } =
+    useContext(ShopContext);
   const cartTotalCount = getCartCount();
 
   const isOpenMobileMenu = (isOpen) => {
@@ -18,6 +22,33 @@ const Header = () => {
       ? (document.body.style.overflow = "hidden") // Забороняємо скролінг сайту
       : (document.body.style.overflow = ""); // Відновлюємо скролінг сайту
     setVisible(isOpen);
+  };
+
+  const logout = async () => {
+    try {
+      setIsLoading(true);
+
+      // Надсилаємо POST запит на бекенд для очищення куки
+      const response = await axios.post(
+        backendUrl + "/api/user/logout",
+        {},
+        { withCredentials: true } // обов'язково! — щоби кука була передана на сервер
+      );
+
+      if (response.data.success) {
+        // console.log(response, "response Logout");
+        setIsLoading(false);
+        navigate("/login");
+        toast.success(response.data.message);
+      } else {
+        setIsLoading(false);
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      setIsLoading(true);
+      console.log(error, "error");
+      toast.success(error.data.message);
+    }
   };
 
   return (
@@ -70,7 +101,9 @@ const Header = () => {
             <div className="profile__menu">
               <p className="profile__item">My Profile</p>
               <p className="profile__item">Orders</p>
-              <p className="profile__item">Logout</p>
+              <p className="profile__item" onClick={logout}>
+                Logout
+              </p>
             </div>
           </div>
           <Link to="/cart" className="wrap-icon cart-icon">

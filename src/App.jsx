@@ -4,9 +4,9 @@ import { ToastContainer } from "react-toastify";
 
 import ShopContextProvider from "./context/ShopContext.jsx";
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import SearchBar from "./components/SearchBar";
+// import Navbar from "./components/Navbar";
+// import Footer from "./components/Footer";
+// import SearchBar from "./components/SearchBar";
 import NetworkStatus from "./components/NetworkStatus";
 import Loader from "./components/Loader";
 
@@ -30,14 +30,17 @@ const App = () => {
       <div>
         <NetworkStatus />
         {isLoading && <Loader />}
-        {/* так підключив нотифікації до апки, а вже в конкретному випадку на сторінках використовуй toast*/}
+        {/* так підключив нотифікації до апки, а вже в конкретному випадку на сторінках використовуй toast */}
         <ToastContainer position="top-center" autoClose={1800} />
-        <Navbar />
+        {/* <Navbar />
         <SearchBar />
         <main>
           <Outlet />
         </main>
-        <Footer />
+        <Footer /> */}
+        <main>
+          <Outlet /> {/* Вихід на маршрути: Login або MainLayout */}
+        </main>
       </div>
     </ShopContextProvider>
   );
