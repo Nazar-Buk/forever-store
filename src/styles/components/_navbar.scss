@@ -53,27 +53,38 @@ header.header__container {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(0.938rem, 0.3rem + 1.42vw, 2rem); // 32px
-      position: relative;
+      gap: clamp(0.625rem, 0.438rem + 0.94vw, 1.563rem); // 25px
 
       .wrap-icon {
-        width: 24px;
         cursor: pointer;
 
+        img {
+          width: 24px;
+        }
+
         &.profile {
+          position: relative;
+          padding: 0 10px;
+
+          .profile__menu {
+            display: none;
+            position: absolute;
+            width: 220px;
+            left: -150px;
+            top: 100%;
+            z-index: 10;
+            box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+            background-color: v.$profile-menu-bg;
+            padding: 12px 18px;
+            border-radius: 4px;
+          }
+
           a {
             display: inline-block;
           }
 
           &:hover .profile__menu {
             display: block;
-            position: absolute;
-            width: 220px;
-            right: 0;
-            box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
-            background-color: v.$profile-menu-bg;
-            padding: 12px 18px;
-            border-radius: 4px;
 
             .profile__item {
               cursor: pointer;
@@ -86,10 +97,6 @@ header.header__container {
                 color: v.$profile-menu-item-color-hover;
               }
             }
-          }
-
-          .profile__menu {
-            display: none;
           }
         }
 

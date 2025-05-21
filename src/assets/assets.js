@@ -83,6 +83,7 @@ import cross_icon from "./cross_icon.png";
 import error_404 from "./error_404.gif";
 import empty_cart from "./empty_cart.png";
 import empty_products from "./empty_products.jpg";
+import hero_video from "./hero_video1.mp4";
 
 export const assets = {
   logo,
@@ -106,6 +107,7 @@ export const assets = {
   error_404,
   empty_cart,
   empty_products,
+  hero_video,
 };
 
 export const products = [

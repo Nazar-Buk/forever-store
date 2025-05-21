@@ -75,7 +75,8 @@
 
           .hero__picture {
             flex: auto;
-            aspect-ratio: 614/491;
+            // aspect-ratio: 614/491;
+            aspect-ratio: 430/230;
 
             img {
             }
@@ -173,6 +174,8 @@
           }
 
           .hero__picture {
+            aspect-ratio: 614/491;
+
             img {
             }
           }
