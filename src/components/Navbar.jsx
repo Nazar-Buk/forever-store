@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -10,11 +10,18 @@ import Loader from "./Loader";
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const adminPanelUrl = import.meta.env.VITE_ADMIN_PANEL_URL;
 
   const [visible, setVisible] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { setShowSearch, getCartCount, isLoading, setIsLoading, backendUrl } =
-    useContext(ShopContext);
+  const {
+    setShowSearch,
+    getCartCount,
+    isLoading,
+    setIsLoading,
+    backendUrl,
+    // isAuthenticated,
+  } = useContext(ShopContext);
   const cartTotalCount = getCartCount();
 
   const isOpenMobileMenu = (isOpen) => {
@@ -23,6 +30,35 @@ const Header = () => {
       : (document.body.style.overflow = ""); // Відновлюємо скролінг сайту
     setVisible(isOpen);
   };
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const checkAuth = async () => {
+    try {
+      const response = await axios.get(backendUrl + "/api/user/check-auth", {
+        withCredentials: true, // обов'язково, щоб кука була передана на сервер
+      });
+
+      console.log(response, "response from checkAuth");
+
+      if (response.data.success) {
+        setIsAuthenticated(true);
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      console.log("Auth check failed:", error);
+      setIsAuthenticated(false);
+      // toast.error(error.data.message);
+    }
+  };
+
+  // console.log(isAuthenticated, "isAuthenticated CONTEXT");
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  console.log(isAuthenticated, "isAuthenticated");
 
   const logout = async () => {
     try {
@@ -101,9 +137,23 @@ const Header = () => {
             <div className="profile__menu">
               <p className="profile__item">My Profile</p>
               <p className="profile__item">Orders</p>
-              <p className="profile__item" onClick={logout}>
-                Logout
-              </p>
+              {isAuthenticated && (
+                <p
+                  className="profile__item"
+                  // onclick={() => navigate(adminPanelUrl)}
+                >
+                  <a href={adminPanelUrl}>Admin Panel</a>
+                </p>
+              )}
+              {isAuthenticated ? (
+                <p className="profile__item" onClick={logout}>
+                  Logout
+                </p>
+              ) : (
+                <p className="profile__item">
+                  <Link to="/login">Login</Link>
+                </p>
+              )}
             </div>
           </div>
           <Link to="/cart" className="wrap-icon cart-icon">

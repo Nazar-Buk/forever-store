@@ -93,6 +93,13 @@ header.header__container {
               font-weight: v.$profile-menu-item-weight;
               padding: 12px 0;
 
+              a {
+                cursor: pointer;
+                color: v.$profile-menu-item-color;
+                font-size: v.$profile-menu-item-size;
+                font-weight: v.$profile-menu-item-weight;
+              }
+
               &:hover {
                 color: v.$profile-menu-item-color-hover;
               }
