@@ -15,6 +15,7 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const currency = "$";
   const delivery_fee = 10; // вартість доставки
@@ -171,6 +172,33 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // const checkAuth = async () => {
+  //   try {
+  //     const response = await axios.get(backendUrl + "/api/user/check-auth", {
+  //       withCredentials: true, // обов'язково, щоб кука була передана на сервер
+  //     });
+
+  //     console.log(response, "response from checkAuth");
+
+  //     if (response.data.success) {
+  //       setIsAuthenticated(true);
+  //       toast.success(response.data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log("Auth check failed:", error);
+  //     setIsAuthenticated(false);
+  //     // toast.error(error.data.message);
+  //   }
+  // };
+
+  // console.log(isAuthenticated, "isAuthenticated CONTEXT");
+
+  // useEffect(() => {
+  //   checkAuth();
+  // }, []);
+
   useEffect(() => {
     getProductsData();
   }, []);
@@ -194,6 +222,7 @@ const ShopContextProvider = (props) => {
     desiredSizesOrder,
     isLoading,
     setIsLoading,
+    // isAuthenticated,
   };
 
   return (
