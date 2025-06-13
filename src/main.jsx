@@ -114,10 +114,10 @@ const router = createBrowserRouter(
     //   path: "/login",
     //   element: <Login />,
     // },
-  ],
-  {
-    basename: import.meta.env.BASE_URL, // реакт сам знає що це тягнеться із файлу vite.config.js
-  }
+  ]
+  // {
+  //   basename: import.meta.env.BASE_URL, // реакт сам знає що це тягнеться із файлу vite.config.js
+  // }
 );
 
 window.addEventListener("load", () => {
