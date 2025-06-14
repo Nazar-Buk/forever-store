@@ -13,17 +13,17 @@ import Loader from "./components/Loader";
 import "./styles/main.scss";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const appWasLoaded = () => {
-      setIsLoading(false);
-    };
+  // useEffect(() => {
+  //   const appWasLoaded = () => {
+  //     setIsLoading(false);
+  //   };
 
-    window.addEventListener("load", appWasLoaded); // Підписуємось на подію load
+  //   window.addEventListener("load", appWasLoaded); // Підписуємось на подію load
 
-    return () => window.removeEventListener("load", appWasLoaded); // Очищаємо слухач події при демонтажі компонента
-  }, []);
+  //   return () => window.removeEventListener("load", appWasLoaded); // Очищаємо слухач події при демонтажі компонента
+  // }, []);
 
   return (
     <ShopContextProvider>
