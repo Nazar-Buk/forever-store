@@ -29,7 +29,7 @@ const App = () => {
     <ShopContextProvider>
       <div>
         <NetworkStatus />
-        {isLoading && <Loader />}
+        {/* {isLoading && <Loader />} */}
         {/* так підключив нотифікації до апки, а вже в конкретному випадку на сторінках використовуй toast */}
         <ToastContainer position="top-center" autoClose={1800} />
         {/* <Navbar />
